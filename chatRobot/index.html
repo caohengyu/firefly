@@ -1,1 +1,236 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>聊天机器人</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .clear-fix::before,.clear-fix::after{
+            content: '';
+            display: table;
+            clear: both;
+        }
+        body{
+            background-position: center,center;
+            background-size: cover,cover;
+            background-repeat: no-repeat,no-repeat;
+        }
+        .container{
+            width: 68%;
+            min-width: 300px;
+            margin: 20px auto;
+        }
+        .box{
+            width: 100%;
+            overflow: auto;
+            background-color: rgba(222, 183, 25,0.5);
+        }
+        ul{
+            width: 100%;
+            list-style: none;
+        }
+        li{
+            width: 100%;
+            margin-bottom: 10px;
+            border-top: 0.1px solid transparent;
+        }
+        img{
+            float: left;
+            height: 30px;
+            margin-left: 5px;
+            margin-top: 5px;
+        }
+        p{
+            font-size: 15px;
+            line-height: 25px;
+            margin-top: 10px;
+            margin-left: 5px;
+            width: 80%;
+            overflow: hidden;
+            word-break:break-all;
+            white-space:pre-wrap; /*保留空白和换行*/ 
+        }
+        .robot{
+            color: #340716;
+        }
+        .robot::before{
+            content: "robot:";
+            color: #000;
+            margin: 0 5px;
+        }
+        .me{
+            color: #00007c;
+        }
+        .me::before{
+            content: "me:";
+            color: #000;
+            margin: 0 5px;
+        }
+
+        footer{
+            width: 100%;
+            position: relative;
+            height: 60px;
+            text-align: left;
+        }
+        .text{
+            width: 60%;
+            border: none;
+            height: 60px;
+            line-height: 20px;
+            font-size: 14px;
+            vertical-align: bottom;
+            outline: none;
+            resize: none;
+            background-color: rgba(255,250,230,0.8);
+        }
+        .btn,.clear{
+            border: none;
+            height: 60px;
+            line-height: 60px;
+            font-size: 18px;
+            background-color: rgba(17, 156, 28, 0.8);
+            color: #efd8ff;
+            width: 100px;
+            outline: none;
+        }
+        .btn:hover{
+            background-color: rgba(17,18,230,0.8);
+            color: #ffff13;
+        }
+        .clear{
+            float: right;
+            font-size: 14px;
+            height: 30px;
+            line-height: 30px;
+            background-color: rgba(12, 7, 156, 0.6);
+            cursor: pointer;
+	    position:absolute;
+	    right:0;
+            top:-30px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="box">
+        <ul class="chat-box">
+        </ul>
+    </div>
+    <footer>
+        <textarea class="text" placeholder="请输入聊天内容" ></textarea><button class="btn">发送</button><button class="clear">清除聊天内容</button>
+    </footer>
+</div>
+</body>
+</html>
+<script>
+
+    /*设置壁纸 每5秒刷新*/
+    function bag() {
+        var body=document.querySelector('body');
+        var images;
+        var xhr=new XMLHttpRequest();
+        xhr.open('get','images.php');
+        xhr.onreadystatechange=function () {
+	    if(xhr.readyState==4&&xhr.status==200){
+            images=JSON.parse(xhr.responseText);
+            setBag(images);
+            }
+        };
+        xhr.send();
+        function setBag(o,t) {
+            if(o.length){
+                t=t&&t>5000?t:5000;
+                var randomNum=Math.floor(Math.random()*o.length);
+		var url='url(https://cms-origin-cn.battle.net/cms/template_resource/Q78CCH1ADTQ51509569826966.png),';
+                body.style.backgroundImage=url+'url('+o[randomNum]+')';
+                var timer=setInterval(function () {
+                    randomNum=Math.floor(Math.random()*o.length);
+                    body.style.backgroundImage=url+'url('+o[randomNum]+')';
+                },t)
+            }
+        }
+    }
+    bag();
+
+    
+    /*动态设置聊天容器的高度*/
+    function setBoxHeight() {
+        var box=document.querySelector('.box');
+        var width=box.offsetWidth;
+        box.style.height=width*0.5+'px';
+    }
+    setBoxHeight();
+    window.onresize=setBoxHeight;
+
+    
+    /*聊天功能*/
+    function chat() {
+        
+        /*获取聊天框和输入框和发送按钮*/
+        var box=document.querySelector('.box'); //外层box
+        var chatBox=document.querySelector('.chat-box');
+        var txt=document.querySelector('footer .text');
+        var btn=document.querySelector('footer .btn');
+
+        /*绑定按钮点击事件*/
+        btn.addEventListener('click',function () {
+            /*获取输入框的内容*/
+            var str=txt.value;
+            if(str.trim()){
+                /*创建两个聊天的li*/
+                var meLi=document.createElement('li');
+                var robotLi=document.createElement('li');
+                /*给两个li放入头像*/
+                robotLi.innerHTML='<img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2343034665,134891679&fm=58">';
+                meLi.innerHTML='<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532797810567&di=1ac52894ad7242171d9fce4f0ee8b7a0&imgtype=0&src=http%3A%2F%2Fpic.47473.com%2Fupload%2Farticle%2F2015%2F08%2F1309401800.jpg">';
+
+                /*meLi的聊天内容更新并添加到ul容器中*/
+                var meP=document.createElement('p');
+                meP.innerText=str;
+                meP.classList.add('me');
+                meLi.appendChild(meP);
+                
+                chatBox.appendChild(meLi);
+                /*让滚动条保持在最底部*/
+                box.scrollTop=box.scrollHeight;
+                /*清空输入框的内容，恢复placeholder*/
+                txt.value='';
+                txt.placeholder='请输入聊天内容';
+
+                /*robotLi的聊天内容获取*/
+                var xhr=new XMLHttpRequest();
+                xhr.open('post','http://www.tuling123.com/openapi/api');
+                xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+                xhr.onreadystatechange=function () {
+                    if(xhr.readyState==4&&xhr.status==200){
+                    str=JSON.parse(xhr.responseText)["text"];
+                    robotLi.innerHTML+='<p class="robot">'+str+'</p>';
+                    chatBox.appendChild(robotLi);
+                    /*让滚动条保持在最底部*/
+                    box.scrollTop=box.scrollHeight;
+                    }
+                };
+                xhr.send('key=7322a993b5584ee4b9c8855179c40af6&info='+meLi.innerText);
+
+            }else{
+                txt.value='';
+                txt.placeholder="内容为空，请重新输入"
+            }
+        },false);
+
+        /*点击清除按钮，清空聊天内容*/
+        var cl=document.querySelector('footer>.clear');
+        cl.addEventListener('click',function () {
+            chatBox.innerHTML=""; //删除聊天框所有的元素
+        },false)
+
+    }
+    chat();
+
+</script>
