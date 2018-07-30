@@ -135,10 +135,10 @@
         var body=document.querySelector('body');
         var images;
         var xhr=new XMLHttpRequest();
-        xhr.open('get','images.php');
+        xhr.open('get','images.json');
         xhr.onreadystatechange=function () {
 	    if(xhr.readyState==4&&xhr.status==200){
-            images=JSON.parse(xhr.responseText);
+            images=JSON.parse(xhr.responseText);	    
             setBag(images);
             }
         };
