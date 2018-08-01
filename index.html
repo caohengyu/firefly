@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TimeDemo</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: #a8d7ff;
+            transition: all 1.5s;
+        }
+        /*顶部倒计时 B*/
+        .count{
+            width: 500px;
+            height: 50px;
+            background-color: rgba(100, 150, 200, 0.5);
+            color: lightgoldenrodyellow;
+            text-align: center;
+            font: bold 30px/50px 宋体;
+            position: fixed;
+            left: 50%;
+            top:0;
+            margin-left: -250px;
+        }
+        /*顶部倒计时 E*/
+        /*tab选项卡B*/
+        .tab{
+            width: 590px;
+            height: 535px;
+            margin: 0 auto;
+            margin-top: 50px;
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid transparent;
+        }
+        .tab>div:nth-of-type(2){
+            width: 322px;
+            height: 513px;
+            margin: 0 auto;
+            border-top: 1px solid transparent;
+        }
+        .tab>div:nth-of-type(3){
+            width: 322px;
+            height: 513px;
+            margin: 0 auto;
+            border-top: 1px solid transparent;
+        }
+        .none{
+            display: none;
+        }
+        .show{
+            display: block;
+        }
+        ul#menu{
+            width: 100%;
+            position: absolute;
+            border-bottom: 2px solid #fffc63;
+            z-index: 1;
+        }
+        ul#menu>li{
+            list-style: none;
+            float: left;
+            margin-right: 5px;
+            margin-top: 10px;
+            width: 120px;
+            height: 35px;
+            line-height: 35px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 18px;
+            box-sizing: border-box;
+        }
+        .normal{
+            background-color: #407bde;
+            color: #eee;
+        }
+        .click{
+            background-color: #bf1915;
+            border: 2px solid #fffe00;
+            border-bottom: none;
+            color: #fffbf9;
+        }
+        ul#menu>li:hover{
+            background-color: #407bde;
+            color: #f5ff0f;
+            text-decoration: underline;
+        }
+        /*计算器 B*/
+        .calc{
+            width: 320px;
+            margin-top: 60px;
+            border: 1px solid blue;
+            background-color: #fafafa;
+        }
+        .clearFloat:before,.clearFloat:after{
+            content: "";
+            display: table;
+            clear: both;
+        }
+        .calc .top{
+            text-align: center;
+            line-height: 60px;
+            font-size: 20px;
+        }
+        .calc .content .display input{
+            width: 100%;
+            text-align: left;
+            box-sizing: border-box;
+            padding-left: 10px;
+            border: none;
+            background-color: #fbfbfb;
+            text-overflow: ellipsis;
+        }
+        .calc .content .display .txt1{
+            line-height: 30px;
+            font-size: 18px;
+            color: #666;
+        }
+        .calc .content .display .txt2{
+            line-height: 60px;
+            font-size: 24px;
+            border-bottom: solid 1px #ccc;
+        }
+        .calc .content .btn li{
+            list-style: none;
+            width: 80px;
+            height: 60px;
+            text-align: center;
+            float: left;
+            font: bold 24px/60px 宋体 ;
+            cursor: default;
+        }
+        .calc .content .btn li:hover{
+            background-color: #ccc;
+        }
+        /*计算器 E*/
+        /*计算器二 B*/
+        .calc1{
+            width: 320px;
+            margin: 0 auto;
+            margin-top: 70px;
+            border: 1px solid #2a88ff;
+        }
+        .calc1 .top1{
+            text-align: center;
+            border-bottom: solid 1px #ccc;
+            background-color: #efefef
+        }
+        .calc1 .top1 span{
+            line-height: 50px;
+            font-size: 24px;
+            color: darkblue;
+        }
+        .calc1 .top1 p{
+            text-align: left;
+            font-size: 12px;
+            color: #666;
+            line-height: 20px;
+        }
+        .calc1 .content1 .display1 textarea{
+            width: 100%;
+            text-align: left;
+            text-overflow: ellipsis;
+            display: block;
+            font: 16px/20px 微软雅黑;
+            color: #520;
+            border: none;
+            outline: none;
+            border-bottom: solid 1px #ccc;
+            padding-left: 5px;
+            box-sizing: border-box;
+            resize: none;
+            background-color: #ecffbe;
+        }
+        .calc1 .content1 .btn1 li{
+            list-style: none;
+            width: 80px;
+            height: 60px;
+            text-align: center;
+            float: left;
+            font: bold 24px/60px 宋体 ;
+            cursor: pointer;
+        }
+        .calc1 .content1 .btn1 li:hover{
+            background-color: #ccc;
+        }
+        /*计算器二 E*/
+        /*tab选项卡E*/
+        /*时钟 B*/
+        /*时钟外壳 B*/
+        .shell{
+            width: 260px;
+            height: 260px;
+            margin: 100px auto;
+            margin-bottom: 70px;
+            border-radius: 45px;
+            padding-top: 5px;
+            position: relative;
+        }
+        .shell>.shell1{
+            width: 260px;
+            height: 260px;
+            background-color: #e62f0d;
+            border-radius: 45px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            animation: sport1 15s linear infinite;
+            -moz-animation: sport1 15s linear infinite;
+            -webkit-animation: sport1 15s linear infinite;
+            -o-animation: sport1 15s linear infinite;
+        }
+        .shell>.shell2{
+            width: 260px;
+            height: 260px;
+            background-color: #e6e222;
+            border-radius: 45px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            animation: sport 10s linear infinite;
+            -moz-animation: sport 10s linear infinite;
+            -o-animation: sport 10s linear infinite;
+            -webkit-animation: sport 10s linear infinite;
+        }
+        @keyframes sport {
+            0%{
+            }
+            25%{
+                opacity: 0.8;
+                transform: rotateZ(135deg);
+                -ms-transform: rotateZ(135deg);
+                -moz-transform: rotateZ(135deg);
+                -webkit-transform: rotateZ(135deg);
+                background-color: #ff6926;
+            }
+            50%{
+                opacity: 0.6;
+                transform: rotateZ(225deg);
+                -o-transform: rotateZ(225deg);
+                -moz-transform: rotateZ(225deg);
+                -webkit-transform: rotateZ(225deg);
+                background-color: #1ffc10;
+            }
+            75%{
+                opacity: 0.8;
+                transform: rotateZ(315deg);
+                -o-transform: rotateZ(315deg);
+                -moz-transform: rotateZ(315deg);
+                -webkit-transform: rotateZ(315deg);
+                background-color: #ce3899;
+            }
+            100%{
+                opacity: 1;
+                transform: rotateZ(405deg);
+                -o-transform: rotateZ(405deg);
+                -moz-transform: rotateZ(405deg);
+                -webkit-transform: rotateZ(405deg);
+                background-color: #e6e222;
+            }
+        }
+        @-moz-keyframes sport {
+            0%{
+            }
+            25%{
+                opacity: 0.8;
+                transform: rotateZ(135deg);
+                -ms-transform: rotateZ(135deg);
+                -moz-transform: rotateZ(135deg);
+                -webkit-transform: rotateZ(135deg);
+                background-color: #ff6926;
+            }
+            50%{
+                opacity: 0.6;
+                transform: rotateZ(225deg);
+                -o-transform: rotateZ(225deg);
+                -moz-transform: rotateZ(225deg);
+                -webkit-transform: rotateZ(225deg);
+                background-color: #1ffc10;
+            }
+            75%{
+                opacity: 0.8;
+                transform: rotateZ(315deg);
+                -o-transform: rotateZ(315deg);
+                -moz-transform: rotateZ(315deg);
+                -webkit-transform: rotateZ(315deg);
+                background-color: #ce3899;
+            }
+            100%{
+                opacity: 1;
+                transform: rotateZ(405deg);
+                -o-transform: rotateZ(405deg);
+                -moz-transform: rotateZ(405deg);
+                -webkit-transform: rotateZ(405deg);
+                background-color: #e6e222;
+            }
+        }
+        @-webkit-keyframes sport {
+            0%{
+            }
+            25%{
+                opacity: 0.8;
+                transform: rotateZ(135deg);
+                -ms-transform: rotateZ(135deg);
+                -moz-transform: rotateZ(135deg);
+                -webkit-transform: rotateZ(135deg);
+                background-color: #ff6926;
+            }
+            50%{
+                opacity: 0.6;
+                transform: rotateZ(225deg);
+                -o-transform: rotateZ(225deg);
+                -moz-transform: rotateZ(225deg);
+                -webkit-transform: rotateZ(225deg);
+                background-color: #1ffc10;
+            }
+            75%{
+                opacity: 0.8;
+                transform: rotateZ(315deg);
+                -o-transform: rotateZ(315deg);
+                -moz-transform: rotateZ(315deg);
+                -webkit-transform: rotateZ(315deg);
+                background-color: #ce3899;
+            }
+            100%{
+                opacity: 1;
+                transform: rotateZ(405deg);
+                -o-transform: rotateZ(405deg);
+                -moz-transform: rotateZ(405deg);
+                -webkit-transform: rotateZ(405deg);
+                background-color: #e6e222;
+            }
+        }
+        @-o-keyframes sport {
+            0%{
+            }
+            25%{
+                opacity: 0.8;
+                transform: rotateZ(135deg);
+                -ms-transform: rotateZ(135deg);
+                -moz-transform: rotateZ(135deg);
+                -webkit-transform: rotateZ(135deg);
+                background-color: #ff6926;
+            }
+            50%{
+                opacity: 0.6;
+                transform: rotateZ(225deg);
+                -o-transform: rotateZ(225deg);
+                -moz-transform: rotateZ(225deg);
+                -webkit-transform: rotateZ(225deg);
+                background-color: #1ffc10;
+            }
+            75%{
+                opacity: 0.8;
+                transform: rotateZ(315deg);
+                -o-transform: rotateZ(315deg);
+                -moz-transform: rotateZ(315deg);
+                -webkit-transform: rotateZ(315deg);
+                background-color: #ce3899;
+            }
+            100%{
+                opacity: 1;
+                transform: rotateZ(405deg);
+                -o-transform: rotateZ(405deg);
+                -moz-transform: rotateZ(405deg);
+                -webkit-transform: rotateZ(405deg);
+                background-color: #e6e222;
+            }
+        }
+        @keyframes sport1 {
+            0%{
+            }
+            25%{
+                transform: rotateZ(-90deg);
+                -ms-transform: rotateZ(-90deg);
+                -moz-transform: rotateZ(-90deg);
+                -webkit-transform: rotateZ(-90deg);
+                background-color: #0d14ff;
+                opacity: 0.8;
+            }
+            50%{
+                transform: rotateZ(-180deg);
+                -o-transform: rotateZ(-180deg);
+                -moz-transform: rotateZ(-180deg);
+                -webkit-transform: rotateZ(-180deg);
+                background-color: #fcf018;
+                opacity: 0.6;
+            }
+            75%{
+                opacity: 0.8;
+                transform: rotateZ(-270deg);
+                -o-transform: rotateZ(-270deg);
+                -moz-transform: rotateZ(-270deg);
+                -webkit-transform: rotateZ(-270deg);
+                background-color: #1ffc10;
+            }
+            100%{
+                opacity: 1;
+                transform: rotateZ(-360deg);
+                -o-transform: rotateZ(-360deg);
+                -moz-transform: rotateZ(-360deg);
+                -webkit-transform: rotateZ(-360deg);
+                background-color: #e62f0d;
+            }
+        }
+        @-moz-keyframes sport1 {
+            0%{
+            }
+            25%{
+                opacity: 0.8;
+                transform: rotateZ(-90deg);
+                -ms-transform: rotateZ(-90deg);
+                -moz-transform: rotateZ(-90deg);
+                -webkit-transform: rotateZ(-90deg);
+                background-color: #4888c1;
+            }
+            50%{
+                opacity: 0.6;
+                transform: rotateZ(-180deg);
+                -o-transform: rotateZ(-180deg);
+                -moz-transform: rotateZ(-180deg);
+                -webkit-transform: rotateZ(-180deg);
+                background-color: #13ac38;
+            }
+            75%{
+                opacity: 0.8;
+                transform: rotateZ(-270deg);
+                -o-transform: rotateZ(-270deg);
+                -moz-transform: rotateZ(-270deg);
+                -webkit-transform: rotateZ(-270deg);
+                background-color: #d1d917;
+            }
+            100%{
+                opacity: 1;
+                transform: rotateZ(-360deg);
+                -o-transform: rotateZ(-360deg);
+                -moz-transform: rotateZ(-360deg);
+                -webkit-transform: rotateZ(-360deg);
+                background-color: #b12373;
+            }
+        }
+        @-webkit-keyframes sport1 {
+            0%{
+            }
+            25%{
+                opacity: 0.8;
+                transform: rotateZ(-90deg);
+                -ms-transform: rotateZ(-90deg);
+                -moz-transform: rotateZ(-90deg);
+                -webkit-transform: rotateZ(-90deg);
+                background-color: #120ba9;
+            }
+            50%{
+                opacity: 0.6;
+                transform: rotateZ(-180deg);
+                -o-transform: rotateZ(-180deg);
+                -moz-transform: rotateZ(-180deg);
+                -webkit-transform: rotateZ(-180deg);
+                background-color: #fcf018;
+            }
+            75%{
+                opacity: 0.8;
+                transform: rotateZ(-270deg);
+                -o-transform: rotateZ(-270deg);
+                -moz-transform: rotateZ(-270deg);
+                -webkit-transform: rotateZ(-270deg);
+                background-color: #1b980c;
+            }
+            100%{
+                opacity: 1;
+                transform: rotateZ(-360deg);
+                -o-transform: rotateZ(-360deg);
+                -moz-transform: rotateZ(-360deg);
+                -webkit-transform: rotateZ(-360deg);
+                background-color: #c1270b;
+            }
+        }
+        @-o-keyframes sport1 {
+            0%{
+            }
+            25%{
+                opacity: 0.8;
+                transform: rotateZ(-90deg);
+                -ms-transform: rotateZ(-90deg);
+                -moz-transform: rotateZ(-90deg);
+                -webkit-transform: rotateZ(-90deg);
+                background-color: #0d14ff;
+            }
+            50%{
+                opacity: 0.6;
+                transform: rotateZ(-180deg);
+                -o-transform: rotateZ(-180deg);
+                -moz-transform: rotateZ(-180deg);
+                -webkit-transform: rotateZ(-180deg);
+                background-color: #fcf018;
+            }
+            75%{
+                opacity: 0.8;
+                transform: rotateZ(-270deg);
+                -o-transform: rotateZ(-270deg);
+                -moz-transform: rotateZ(-270deg);
+                -webkit-transform: rotateZ(-270deg);
+                background-color: #1ffc10;
+            }
+            100%{
+                opacity: 1;
+                transform: rotateZ(-360deg);
+                -o-transform: rotateZ(-360deg);
+                -moz-transform: rotateZ(-360deg);
+                -webkit-transform: rotateZ(-360deg);
+                background-color: #e62f0d;
+            }
+        }
+        /*时钟外壳 E*/
+        /*圆盘 B*/
+        .disk{
+            width: 250px;
+            height: 250px;
+            background-color: #e9ffbf;
+            border-radius: 50%;
+            margin: 0 auto;
+            position: relative;
+        }
+        /*圆盘 B*/
+        /*刻度 B*/
+        .disk>div{
+            height: 250px;
+            width: 4px;
+            position: absolute;
+            left: 123px;
+        }
+        /*使div旋转,其两端作为12个刻度的位置*/
+        .scale1{
+            transform: rotate(30deg);
+        }
+        .scale2{
+            transform: rotate(60deg);
+        }
+        .scale3{
+            transform: rotate(90deg);
+        }
+        .scale4{
+            transform: rotate(-60deg);
+        }
+        .scale5{
+            transform: rotate(-30deg);
+        }
+        /*统一设置上下刻度*/
+        .disk .top{
+            width: 4px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .disk .top div{
+             height: 8px;
+             background-color: #666;
+         }
+        .disk .top p{
+            margin-left: -5px;
+            font-size: 14px;
+            color: #666;
+        }
+        .disk .bottom{
+            width: 4px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+        .disk .bottom div{
+            height: 8px;
+            background-color: #888;
+        }
+        .disk .bottom p{
+            margin-left: -3px;
+            color: #888;
+        }
+        /*调整数字的倾斜度*/
+        .scale1 p{
+            transform: rotate(-30deg);
+        }
+        .scale2 p{
+            transform: rotate(-60deg);
+        }
+        .scale3 p{
+            transform: rotate(-90deg);
+        }
+        .scale4 p{
+            transform: rotate(60deg);
+        }
+        .scale5 p{
+            transform: rotate(30deg);
+        }
+        /*刻度 E*/
+        /*设置圆盘的中心点*/
+        .shell .disk .point{
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            background-color: #050681;
+            position: absolute;
+            left: 120px;
+            top: 120px;
+        }
+        /*设置指针的样式*/
+        .shell .disk .second,.shell .disk .minute,.shell .disk .hour{
+            position: absolute;
+            transform-origin: 50% bottom;
+        }
+        .shell .disk .second{
+            height: 108px;
+            width: 2px;
+            background-color: #f6fcff;
+            border: 1px solid #191dff;
+            left: 123px;
+            top: 15px;
+            border-radius: 4px;
+        }
+        .shell .disk .minute{
+            height: 79px;
+            width: 2px;
+            background-color: #fff;
+            border: 3px solid #5e60b4;
+            left: 121px;
+            top: 40px;
+            border-radius: 8px;
+        }
+        .shell .disk .hour{
+            height: 62px;
+            width: 2px;
+            background-color: #fff;
+            border: 4px solid #888;
+            left: 120px;
+            top: 55px;
+            border-radius: 10px;
+        }
+        /*时钟 E*/
+        /*操作时钟 B*/
+        .control{
+            width: 590px;
+            height: 50px;
+            background-color: skyblue;
+            margin: 0 auto;
+            padding-left: 10px;
+            text-align: center;
+            line-height: 50px;
+            position: relative;
+        }
+        .control button{
+            width: 80px;
+            height: 30px;
+            margin-right: 10px;
+            vertical-align: middle;
+            border: none;
+            background-color: red;
+            color: #fff;
+            line-height: 30px;
+            font-size: 16px;
+        }
+        .control .txt{
+            width: 150px;
+            height: 30px;
+            border: none;
+            background-color: goldenrod;
+            color: #130890;
+            font-size: 18px;
+            text-align: center;
+            margin-right: 10px;
+        }
+        /*操作时钟 E*/
+        /*其他*/
+        .about{
+            position: absolute;
+            left: 20px;
+            top: 180px;
+            width: 300px;
+            height: 300px;
+            text-align: center;
+        }
+        .about h1{
+            font: 24px "微软雅黑";
+            color: darkblue;
+        }
+        .about p{
+            font-size: 20px;
+            color: #222;
+            line-height: 40px;
+        }
+        .about b{
+            display: inline-block;
+            background-color: #3332c7;
+        }
+        .about a{
+            display: inline-block;
+            text-decoration: none;
+            color: #eee;
+            font-size: 20px;
+            width: 250px;
+            height: 70px;
+            line-height: 70px;
+        }
+        .about a:hover{
+            background-color: green;
+            color: #f5ff0f;
+        }
+
+        /*日历系统*/
+        .calendar{
+            width: 287px;
+            height: 315px;
+            box-sizing: border-box;
+            padding: 10px 20px;
+            border: 1px solid #cc3111;
+            position: absolute;
+            right: 0;
+            top: 100px;
+            z-index: 2;
+            text-align: center;
+            background-color: #f4ffbd;
+        }
+        /*标题*/
+        .calendar .title{
+            height: 50px;
+            border-bottom: solid 1px darkblue;
+            position: relative;
+            box-sizing: border-box;
+            zoom: 1;
+        }
+        .title p{
+            font-size: 24px;
+            line-height: 50px;
+            color: #666;
+        }
+        .title div{
+            position: absolute;
+            border-width: 10px 20px;
+            border-style: solid;
+            border-color: transparent;
+            top: 50%;
+            margin-top: -5px;
+            cursor: pointer;
+        }
+        .title .left{
+            border-right-color: #666666;
+            border-left-width: 0;
+        }
+        .title .right{
+            right: 0;
+            border-left-color: #666666;
+            border-right-width: 0;
+        }
+        .calendar .table{
+            width: 100%;
+            border-collapse: collapse;
+            text-align:center;
+        }
+        /* 表格行高 */
+        .calendar .table tr{
+            line-height: 35px;
+        }
+        .currentDay{
+            color: #fafcfc;
+            background-color: #666666;
+        }
+        .currentMonth {
+            color: #666;
+        }
+        .otherMonth{
+            color: #999;
+        }
+    </style>
+</head>
+<body id="body">
+<!--顶部倒计时-->
+<div class="count">
+    <p> 距离<span id="year"></span>年:<span id="td">00天</span><span id="th">00时</span><span id="tm">00分</span><span id="ts">00秒</span>
+    </p>
+</div>
+<!--tab选项卡 E-->
+<div class="tab" id="tab">
+    <ul id="menu" class="clearFloat">
+        <li>时钟</li>
+        <li>计算器一</li>
+        <li>计算器二</li>
+    </ul>
+    <!--时钟 B-->
+    <div id="one">
+        <div class="shell" id="shell">
+            <div class="shell1"></div>
+            <div class="shell2"></div>
+            <div class="disk">
+                <div class="scale1">
+                    <div class="top">
+                        <div></div>
+                        <p>1</p>
+                    </div>
+                    <div class="bottom">
+                        <p>7</p>
+                        <div></div>
+                    </div>
+                </div>
+                <div class="scale2">
+                    <div class="top">
+                        <div></div>
+                        <p>2</p>
+                    </div>
+                    <div class="bottom">
+                        <p>8</p>
+                        <div></div>
+                    </div>
+                </div>
+                <div class="scale3">
+                    <div class="top">
+                        <div></div>
+                        <p>3</p>
+                    </div>
+                    <div class="bottom">
+                        <p>9</p>
+                        <div></div>
+                    </div>
+                </div>
+                <div class="scale4">
+                    <div class="top">
+                        <div></div>
+                        <p>10</p>
+                    </div>
+                    <div class="bottom">
+                        <p>4</p>
+                        <div></div>
+                    </div>
+                </div>
+                <div class="scale5">
+                    <div class="top">
+                        <div></div>
+                        <p>11</p>
+                    </div>
+                    <div class="bottom">
+                        <p>5</p>
+                        <div></div>
+                    </div>
+                </div>
+                <div class="scale6">
+                    <div class="top">
+                        <div></div>
+                        <p style="margin-left: -7px">12</p>
+                    </div>
+                    <div class="bottom">
+                        <p>6</p>
+                        <div></div>
+                    </div>
+                </div>
+                <div class="hour" id="hour"></div>
+                <div class="minute" id="minute"></div>
+                <div class="second" id="second"></div>
+                <div class="point"></div>
+            </div>
+        </div>
+        <!--控制按钮-->
+        <div class="control">
+            <div>
+                <button class="b1"id="b1">放大</button>
+                <button class="b2" id="b2">Stop</button>
+                <button class="b3" id="b3">Restart</button>
+                <input type="text" class="txt" id="txt" readonly="readonly">
+                <button class="b4" id="b4">还原</button>
+            </div>
+            <div style="width: 590px;height: 50px;position: absolute;left:0;top: 50px;line-height:
+        50px;padding-left: 10px">
+                <input type="button" value="黄色背景"
+                       style="background-color: yellow;width: 80px;height: 30px" onclick="body.style.backgroundColor='yellow'">
+                <input type="button" value="白色背景"
+                       style="background-color: white;width: 80px;height: 30px"
+                       onclick="body.style.backgroundColor='#efefef'">
+                <input type="button" value="蓝色背景"
+                       style="background-color: deepskyblue;width: 80px;height: 30px" onclick="body.style.backgroundColor='deepskyblue'">
+                <input type="button" value="粉色背景"
+                       style="background-color: pink;width: 80px;height: 30px"
+                       onclick="body.style.backgroundColor='pink'">
+            </div>
+        </div>
+    </div>
+    <!--计算器 B-->
+    <div id="two">
+        <div class="calc clearFloat">
+            <div class="top">
+                <span>myCalculator</span>
+            </div>
+            <div class="content">
+                <div class="display">
+                    <input type="text" id="txt1" class="txt1" value="test" readonly="readonly">
+                    <input type="text" id="txt2" class="txt2" readonly="readonly">
+                </div>
+                <div class="btn" id="btn">
+                    <ul class="clearFloat">
+                        <li>%</li>
+                        <li>√</li>
+                        <li>㎡</li>
+                        <li>1/m</li>
+                    </ul>
+                    <ul class="clearFloat" style="background-color: #efefef;">
+                        <li>CE</li>
+                        <li>C</li>
+                        <li>back</li>
+                        <li>÷</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>×</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>-</li>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>+</li>
+                        <li>±</li>
+                        <li>0</li>
+                        <li>.</li>
+                        <li>=</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--计算器 E-->
+    <!--计算器二 B-->
+    <div id="three">
+        <div class="calc1 clearFloat">
+            <div class="top1">
+                <span>Welcome</span>
+                <p>请输入表达式，点击按钮或点击下面的输入框从键盘输入</p>
+            </div>
+            <div class="content1">
+                <div class="display1">
+                    <textarea  id="txt3" cols="30" rows="3"></textarea>
+                    <textarea  id="txt4" cols="30" rows="3" readonly="readonly"style="font-size: 14px"></textarea>
+                </div>
+                <div class="btn1">
+                    <ul class="clearFloat" id="btn1" style="background-color: #efefef;">
+                        <li>(</li>
+                        <li>)</li>
+                        <li>back</li>
+                        <li>÷</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>×</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>-</li>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>+</li>
+                        <li>C</li>
+                        <li>0</li>
+                        <li>.</li>
+                        <li>=</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--计算器二 E-->
+</div>
+<!--tab选项卡 E-->
+<!--日历-->
+<div class="calendar">
+    <div class="title">
+        <p id="showDate">test</p>
+        <div class="left" id="prev"></div>
+        <div class="right" id="next"></div>
+    </div>
+    <div>
+        <table class="table" id="table">
+        </table>
+    </div>
+</div>
+<!--关于-->
+<div class="about">
+    <h1 id="h1">test</h1>
+    <p> Welcome </p>
+    <p> Author : by c h y</p>
+    <p>Finished Date : 2017/05/30</p>
+</div>
+</body>
+<script type="text/javascript">
+    /*时钟与日历功能 B*/
+    function myClock() {
+        var s=document.getElementById("second"); //获取秒针元素
+        var m=document.getElementById("minute"); //获取分针元素
+        var h=document.getElementById("hour");  //获取时针元素
+        var big=document.getElementById("b1");  //放大按钮
+        var stop=document.getElementById("b2"); //停止按钮
+        var start=document.getElementById("b3"); //开始按钮
+        var back=document.getElementById("b4"); //还原按钮
+        var txt=document.getElementById("txt"); //数字时钟文本框
+        var shell=document.getElementById("shell"); //时钟最外层div
+        var tab=document.getElementById("tab");
+        var t,t1; //定时器,t:时钟 t1:倒计时
+        //    格式化函数,把小于10的转换为05这样的格式
+        function check(i) {
+            return i<10?"0"+i:i+"";
+        }
+        //    时钟旋转函数
+        function init (date,s,m,h,txt){
+            var sp,mp,hp;
+            hp=date.getHours();
+            mp=date.getMinutes();
+            sp=date.getSeconds();
+            function move() {
+                var degS,degM,degH,str;
+                degS=sp*6;
+                degM=mp*6+degS/60;
+                degH=hp*30+degM/12;
+                str="rotate("+degS+"deg)";
+                s.style.transform=str;
+                s.style.mozTransform=str;
+                s.style.webkitTransform=str;
+                s.style.oTransform=str;
+                str="rotate("+degM+"deg)";
+                m.style.transform=str;
+                m.style.mozTransform=str;
+                m.style.webkitTransform=str;
+                m.style.oTransform=str;
+                str="rotate("+degH+"deg)";
+                h.style.transform=str;
+                h.style.mozTransform=str;
+                h.style.webkitTransform=str;
+                h.style.oTransform=str;
+                txt.value=check(hp)+" : "+check(mp)+" : "+check(sp);
+                sp++;
+                if(sp==60){
+                    mp++;
+                    sp=0;
+                }
+                if(mp==60){
+                    hp++;
+                    mp=0
+                }
+                if(hp==24){
+                    hp=0;
+                }
+            }
+            move();
+            t=setInterval(move,1000);
+        }
+        init (new Date(),s,m,h,txt);  //启动时钟
+
+        //    显示当天日期
+        function showDate(date,dom) {
+            var year=date.getFullYear();
+            var month=check(date.getMonth()+1);
+            var mDay=check(date.getDate());
+            if(dom){
+                var day=(function () {
+                    var d=date.getDay();
+                    switch (d){
+                        case 0:
+                            d="星期天";
+                            break;
+                        case 1:
+                            d="星期一";
+                            break;
+                        case 2:
+                            d="星期二";
+                            break;
+                        case 3:
+                            d="星期三";
+                            break;
+                        case 4:
+                            d="星期四";
+                            break;
+                        case 5:
+                            d="星期五";
+                            break;
+                        case 6:
+                            d="星期六";
+                            break;
+                    }
+                    return d;
+                })();
+                dom.innerHTML=year+'年'+month+'月'+mDay+'号'+day;
+            }else{
+                return year+month+mDay;
+            }
+        }
+        showDate(new Date(),h1); //显示格式化的日期到h1标签
+        //    缩放功能
+        function scale(obj,i) {
+            obj.style.transform="scale("+i+","+i+")";
+            obj.style.mozTransform="scale("+i+","+i+")";
+            obj.style.webkitTransform="scale("+i+","+i+")";
+            obj.style.oTransform="scale("+i+","+i+")";
+            if(i>1){
+                obj.style.marginBottom=i*100+"px";
+            }else{
+                obj.style.marginBottom="70px";
+            }
+        }
+        //    放大
+        big.onclick=function () {
+            scale(shell,1.5);
+            tab.style.height="615px"
+        };
+        //    还原大小
+        back.onclick=function () {
+            scale(shell,1);
+            tab.style.height="535px"
+        };
+        //    stop
+        stop.onclick=function () {
+            clearInterval(t);
+            t=null;
+        };
+        //    restart
+        start.onclick=function () {
+            if(!t){
+                init(new Date(),s,m,h,txt);
+            }
+        };
+
+        //    实现倒计时功能
+        var td=document.getElementById("td");  //显示天的span
+        var th=document.getElementById("th");  //显示时的span
+        var tm=document.getElementById("tm");  //显示分钟的span
+        var ts=document.getElementById("ts"); //显示秒的span
+        var endTime=new Date('2019/01/01 00:00:00');//倒计时截止时间
+        
+	function countTime(et,td,th,tm,ts) {
+	    document.getElementById("year").innerText=et.getFullYear();
+            var ct=(et.getTime()-new Date().getTime())/1000;//获取倒计时的秒数
+            function countDown() {
+                //        获取天数
+                var day = parseInt(ct/(60*60*24));
+                day=check(day);
+                //        获取小时数,%24 是因为24小时转换成了天,剩余不到24小时部分为小时数
+                var hour = parseInt(ct/(60*60)%24);
+                hour=check(hour);
+                //        获取分钟数
+                var minute = parseInt(ct/60%60);
+                minute=check(minute);
+                //        获取秒数
+                var second = parseInt(ct%60);
+                second=check(second);
+                td.innerHTML=day+"天";
+                th.innerHTML=hour+"时";
+                tm.innerHTML=minute+"分";
+                ts.innerHTML=second+"秒";
+                ct--;
+                if(ct<0){
+                    td.innerHTML="已经";
+                    th.innerHTML="是";
+                    tm.innerHTML=et.getFullYear();
+                    ts.innerHTML="年";
+                }
+            }
+            t1=setInterval(countDown,1000);
+        }
+        countTime(endTime,td,th,tm,ts); //开始倒计时
+
+        //    实现显示日历的功能
+        var table=document.getElementById("table");  //获得表格
+        var p=document.getElementById("showDate");   //获得显示年月的p标签
+        var prev = document.getElementById("prev");  //获取左边div三角,表示上个月
+        var next = document.getElementById("next");  //获取右边div三角,表示下个月
+        //    绘制表格
+        (function (t) {
+            var tHtml = "<tr>" +
+                "<th>日</th>" +
+                "<th>一</th>" +
+                "<th>二</th>" +
+                "<th>三</th>" +
+                "<th>四</th>" +
+                "<th>五</th>" +
+                "<th>六</th>" +
+                "</tr>";
+            // 一个月最多31天，假设第一天是周六,最多占6行表格
+            for(var i = 0; i < 6; i++) {
+                tHtml += "<tr>" +
+                    "<td></td>" +
+                    "<td></td>" +
+                    "<td></td>" +
+                    "<td></td>" +
+                    "<td></td>" +
+                    "<td></td>" +
+                    "<td></td>" +
+                    "</tr>";
+            }
+            t.innerHTML=tHtml;
+        })(table);
+        //    把数据写入表格
+        function showCalendar(t,obj,p,n) {
+            var date=new Date();      //存储表格显示的月份,默认是当前月
+            var y=date.getFullYear(); //保存当前年
+            var m=date.getMonth();    //保存当前月
+            //显示月份的函数
+            function showMonth() {
+                y=date.getFullYear(); //更新当前年
+                m=date.getMonth();    //更新当前月
+                var str=showDate(date); //调用显示日期的方法showDate,获得当前日期的字符串格式
+                obj.innerText=str.substr(0,4) + "年" + str.substr(4,2) + "月";//显示年月
+                var tds=t.getElementsByTagName("td");//得到表格中的td对象数组
+                var firstDay=new Date(y,m,1);//获得当前月第一天
+                //遍历td数组,写入数据
+                for(var i=0;i<tds.length;i++){
+                    var thisDay=new Date(y,m,i+1-firstDay.getDay());//获得当前表格所在日期
+                    var thisDayStr=showDate(thisDay); //存储日期的字符串格式,用于后面做判断
+                    tds[i].innerText=thisDay.getDate();  //在td中显示日期,1-31
+                    if(thisDayStr == showDate(new Date())){  //如果是今天就加样式
+                        tds[i].className="currentDay";
+                    }else if(thisDayStr.substr(0,6)==showDate(firstDay).substr(0,6)){
+                        tds[i].className="currentMonth";   //当前月
+                    }else{
+                        tds[i].className="otherMonth";  //其他月
+                    }
+                }
+            }
+            showMonth();  //显示月份
+
+            //    为上个月图标添加点击事件
+            p.onclick=function () {
+                m--; //月份自减
+                date=new Date(y,m,1); //更新date,年月对了就行,日期默认1号
+                showMonth()
+            };
+            //    为下个月图标添加点击事件
+            n.onclick=function () {
+                m++; //月份自增
+                date=new Date(y,m,1); //更新date
+                showMonth()
+            };
+        }
+        showCalendar(table,p,prev,next);
+    }
+    myClock(); //调用函数启动时钟
+    /*时钟与日历功能 E*/
+   /* tab选项卡功能 B*/
+   function tb() {
+       var clock =document.getElementById("one");
+       var calc=document.getElementById("two");
+       var calc1=document.getElementById("three");
+       var lis=document.getElementById("menu").getElementsByTagName("li");
+       lis[0].className="click";
+       lis[1].className="normal";
+       lis[2].className="normal";
+       calc.className="none";
+       calc1.className="none";
+       lis[0].onclick=function () {
+           lis[0].className="click";
+           lis[1].className="normal";
+           lis[2].className="normal";
+           clock.className="show";
+           calc.className="none";
+           calc1.className="none";
+       };
+       lis[1].onclick=function () {
+           lis[0].className="normal";
+           lis[1].className="click";
+           lis[2].className="normal";
+           clock.className="none";
+           calc.className="show";
+           calc1.className="none";
+       };
+       lis[2].onclick=function () {
+           lis[0].className="normal";
+           lis[2].className="click";
+           lis[1].className="normal";
+           clock.className="none";
+           calc.className="none";
+           calc1.className="show";
+       }
+   }
+   tb();
+   /* tab选项卡功能 E*/
+
+   /* 计算器功能 B*/
+    function calculator(){
+        var txt1=document.getElementById("txt1"); //第一行文本框,储存输入记录,为记录框
+        var txt2=document.getElementById("txt2"); //第二行文本框,显示最新输入和运算结果,为主显示框
+        var number1,number2,flag,operator; //number1和number2记录执行运算的两个数,flag表示输入状态,operator储存输入的运算符.
+        var r1=/[\d\.]$/;  //判断数字和小数点的正则
+        var r2=/[+÷%×\-]/; //判断二元运算符的正则
+        /*为按钮注册点击事件,点击传入当前按钮的内容到sizer函数执行*/
+        var lis=document.getElementById("btn").getElementsByTagName("li");
+        for(var i=0;i<lis.length;i++){
+            lis[i].onclick=function () {
+                sizer(this.innerText);
+            }
+        }
+        /*清零函数,初始化变量,输入C或CE时调用*/
+        function clear(c) {
+            if(c=="C"){         //如果按的是C键
+                txt1.value="";  //清空第一行显示框
+                txt2.value=0;   //第二行显示框值重置为0,数字会隐式转为字符串
+                flag=false;     //输入状态为false,表示输入会重置主显示框,作为新数
+                operator="";    //初始化运算符为空
+            }else{              //如果按的是CE
+                txt2.value=0;   //重置主显示框
+                flag=false;     //重置输入标记
+                if(txt1.value){ //记录框不为空需要做以下处理
+                    if(operator){ //如果有二元运算符
+                        if(txt1.value.indexOf(operator)>-1){//记录框包含二元运算符
+                            if(txt1.value[txt1.value.length-1]!=operator)//如果运算符不是最后个字符,把运算符后面的字符去掉
+                                txt1.value=txt1.value.substr(0,txt1.value.lastIndexOf(operator)+1);
+                        }else{
+                            txt1.value=""; //不包含二元运算符,二元计算已完成,清空记录框
+                        }
+                    }else{
+                        txt1.value=""; //没有运算符,说明之前都是一元运算,清空记录框
+                    }
+                }
+            }
+        }
+        clear("C"); //页面载入时,传入C进行初始化
+        /*主函数sizer(s),判断输入的字符,执行相应的操作*/
+        function sizer(s) {
+            if(s=="C"||s=="CE"){  //清零
+                clear(s);
+            }else if(r1.test(s)){ //如果是数字和点
+                if(!flag){
+                    clear("s"); //先执行CE操作处理共同部分
+                    if(s==".")  //如果输入的是小数点
+                        txt2.value=0+s; //显示框的值为0加上小数点
+                    txt2.value=s; //不是小数点,替换主显示框的值
+                    flag=true; //更新标记
+                }else{ //flag为true的情况
+                    if(s == ".") {  //标记为true表示已有输入字符,如输入的是小数点
+                        if (txt2.value.indexOf(s) > -1) //判断当前输入是否已有小数点
+                            return false;  //如果已经有小数点,再输入小数点,返回错误
+                        txt2.value += s;  //否则增加小数点,输入数中只能有一个小数点
+                    }else if(txt2.value=="0"){
+                            txt2.value=s; //如果显示框是0,替换0
+                    }else{//其他情况,输入的字符累加
+                            txt2.value+=s;
+                    }
+                }
+            }else if(s=="back"){   //如果按下的是后退键
+                if(!flag) //如果是未输入状态,后退键无效
+                    return false;  //返回错误
+                if(txt2.value.length>1){ //如果已输入,txt2内容是1个长度以上,去掉最后一个字符
+                    txt2.value = txt2.value.substr(0,txt2.value.length-1);
+                }else{
+                    txt2.value=0;//如果只有一个字符,主显示框重置为0
+                }
+            }else if(s=="±"){  //按下的是正负键
+                if(txt2.value>0){  //如果是正数
+                    txt2.value="-"+txt2.value; //前面加上负号
+                }else if(txt2.value<0) { //如果是负数
+                    txt2.value=txt2.value.substr(1);//去掉前面的负号
+                }
+            } else if(s=="="){  //按下的是=号
+                if(!operator){  //没有运算符的情况
+                    txt1.value=""; //清空记录框
+                    flag=false;  //重置标记
+                }else{   //有运算符的情况
+                    if(txt1.value){//记录框不为空
+                        number2=parseFloat(txt2.value); //转换主显示框的值到number2,number2记录的是最近输入的数
+                        txt1.value="";  //清空记录框
+                    }else{
+                        number1=parseFloat(txt2.value);//如果记录框为空,表示已经执行过等号运算,再按=号把上次结果存入number1,用之前存的运算符计算
+                    }
+                    txt2.value=calc(operator); //更新结果到主显示框
+                    flag=false;  //重置标记
+                }
+            }else if(r2.test(s)){  //检测正则表达式,为true,表示输入的是二元运算符,+-×÷%中的一个
+                if(!txt1.value){  //如果记录框为空
+                    number1=parseFloat(txt2.value);//把当前主显示框内容保存到number1
+                    operator=s;   //保存输入的运算符
+                    txt1.value=number1+s;  //记录框的内容更新为输入数+操作符
+                    flag=false;
+                }else{
+                    if(!flag){  //判断标记,标记为false,表示没有输入最新数
+                        if(txt1.value[txt1.value.length-1]==operator) {//判断记录框最后一个字符是否是运算符,是则替换掉
+                            txt1.value=txt1.value.substr(0,txt1.value.length-1)+s; //去掉最后字符再加上s
+                        }else{
+                            txt1.value+=s;
+                            if(operator&&txt1.value.indexOf(operator)>-1){
+                                number1=calc(operator); //如果有运算符,运算符在记录框中,更新number1
+                            }
+                        }
+                        operator=s;//更新运算符
+                    }else{  //有输入二个数的情况下再按运算符,执行等号运算
+                        number2=parseFloat(txt2.value); //更新最新输入到number2
+                        number1=calc(operator); //执行计算获得结果存到number1,这里计算用的是上一次输入的运算符,例如输入的是5+3-,则执行的是+号运算,运算完后再更新运算符为-号
+                        txt2.value=number1;  //更新主显示框的内容为最新结果
+                        txt1.value+=number2+s; //更新记录框,增加最新输入的数和操作符
+                        operator=s;  //保存最新输入的运算符
+                        flag=false; //更新标记为未输入状态
+                    }
+                }
+            }else{  //其他情况,就是点击的是一元运算符√ 1/m ㎡ 中的一个
+                if(operator&&txt1.value.indexOf(operator)>-1){//有二元运算符且记录框包含运算符
+                    number2=parseFloat(txt2.value); //更新number2
+                    txt1.value=txt1.value.substr(0,txt1.value.lastIndexOf(operator)+1)+s+number2;//更新记录框为最后的二元运算符+一元运算+number2
+                    number2=calc(s,number2); //更新number2
+                    txt2.value=number2; //更新主显示框
+                }else{  //记录框不包含二元运算符或没有二元运算符
+                    number1=parseFloat(txt2.value);//更新number1
+                    txt1.value=s+number1;
+                    number1=calc(s,number1);
+                    txt2.value=number1; //更新主显示框
+                }
+                flag=false;  //重置标记
+            }
+        }
+        /*执行一元或二元运算的函数,根据传入的运算符返回结果,如果是一元运算符,可对传入的number做一元运算*/
+        function calc(op,number) {
+            switch (op){
+                case "%":
+                    return number1%number2;
+                case "㎡":
+                    return Math.pow(number,2);
+                case "1/m":
+                    return 1/number;
+                case "√":
+                    return Math.pow(number,1/2);
+                case "÷":
+                    return number1/number2;
+                case "×":
+                    return number1*number2;
+                case "-":
+                    return number1-number2;
+                case "+":
+                    return number1+number2;
+            }
+        }
+    }
+    calculator();
+  /* 计算器功能 E*/
+  /*计算器二功能 B*/
+    function calculator1(){
+        var txt3=document.getElementById("txt3"); //输入框
+        var txt4=document.getElementById("txt4"); //输出框
+        var content="";    //保存过滤后的表达式内容
+        var str=""; //保存最新输入的数
+        var r1=/[\d\.]$/;  //判断后缀为数字和点
+        var r2=/[+÷×/\-\*]$/; //判断后缀为二元运算符
+        var r3=/\($/;  //左括号结尾
+        var r4=/\)$/;  //右括号结尾
+        /*为按钮注册点击事件,点击传入当前按钮的内容到display函数执行*/
+        var lis=document.getElementById("btn1").getElementsByTagName("li");
+        for(var i=0;i<lis.length;i++){
+            lis[i].onclick=function () {
+                display(this.innerText);
+            }
+        }
+        /*给第一行文本框添加键盘事件,如果按下的是enter键,执行等号运算*/
+        txt3.onkeydown=function (event) {
+            e=event||window.event;  //得到事件对象
+            if(e.keyCode=="13"){//如果按下的是enter键,执行等号操作
+                display("=");
+                return false;  //阻止enter键默认的换行行为
+            }
+        };
+        /*display函数接收按钮的值,显示到输入框*/
+        function display(i) {
+            if(i=="C"){
+                txt3.value="";
+                txt4.value="";
+            }else if(i=="back"){
+                if(txt3.value.length>0){
+                    txt3.value=txt3.value.substr(0,txt3.value.length-1);
+                }
+            }else if(i=="="){
+                if(txt3.value.length>0){ //遍历输入框的内容
+                    for(var j=0;j<txt3.value.length;j++ ){
+                        sizer(txt3.value[j]) //执行过滤函数,把过滤后的结果保存到content
+                    }
+                    if(content.search(/\d/)>-1){//表达式中包含了数字才计算
+                        var res=parse(content); //获得表达式的结果
+                        txt4.value=res+"="+content+"\n感谢使用!"; //输出表达式的结果
+                    }else{ //没有数字,提示表达式无效
+                        txt4.value="无效的表达式,请重新输入!\n感谢使用!";
+                    }
+                    content="";    //清空content
+                    txt3.value=""; //清空输入框
+                }
+            }else{
+                txt3.value+=i;
+            }
+        }
+        /*sizer函数过滤输入的内容,把过滤后得到的表达式保存到content*/
+        function sizer(s) {
+            if(!content){
+                if(r1.test(s)){
+                    if(s=="."){
+                        content=0+s;
+                    }else{
+                        content=s;
+                    }
+                    str=content;
+                }else if(r3.test(s)||s=="-"){
+                    content=s;
+                }else{
+                    return false;
+                }
+            }else{
+                if(r1.test(s)){ //如果输入的是数字和点
+                    if(r4.test(content)){//数字和点前面不能有右括号
+                        return false;
+                    } else if(!str){
+                        if(s=="."){
+                            content+=0+s;
+                            str=0+s;
+                        }else{
+                            content+=s;
+                            str=s;
+                        }
+                    }else{
+                        if(s=="."){
+                            if(str.indexOf(".")>-1){
+                                return false;
+                            }else{
+                                content+=s;
+                                str+=s;
+                            }
+                        }else if(str=="0"){
+                            if(s=="."){
+                                str+=s;
+                                content+=s;
+                            }else {
+                                str=s;
+                                content=content.substr(0,content.length-1)+s; //替换最后个字符
+                            }
+                        }else{
+                            str+=s;
+                            content+=s;
+                        }
+                    }
+                }
+                else if(r2.test(s)){//输入的是运算符
+                    if(s!="-"){
+                        if(r3.test(content)) //运算符前面是左括号返回
+                            return false;
+                        if(r2.test(content)) //非负号前面有运算符号返回
+                            return false;
+                        if(s=="\*"){
+                            content+="×";
+                        }else if(s=="/"){
+                            content+="÷"
+                        }else{
+                            content+=s;
+                        }
+                    }else{ //负号的情况
+                        content+=s;
+                    }
+                    str=""; //清空标记
+                }else if(r3.test(s)){//输入的是左括号,左括号前面必须是左括号或者运算符
+                    if(r2.test(content)||r3.test(content)){
+                        content+=s;
+                    }else{
+                        return false;
+                    }
+                }else if(r4.test(s)){ //输入的是右括号,右括号前面必须是数字或者右括号
+                    if(r1.test(content)||r4.test(content)){
+                        content+=s;
+                    }else {
+                        return false;
+                    }
+                }else{//如果是其他字符,返回
+                    return false;
+                }
+            }
+        }
+        /*计算表达式的函数*/
+        function parse(content){
+            //先对有括号的表达式进行求值
+            //寻找最后一个左括号
+            var index = content.lastIndexOf("\(");
+            //如果等式中有左括号
+            if(index > -1){
+                //寻找右括号,从左括号的位置开始寻找
+                var endIndex = content.indexOf("\)",index);
+                //如果等式中有右括号
+                if(endIndex > -1){
+                    //调用自己算出括号中的结果
+                    var result = parse(content.substring(index + 1,endIndex));
+                    //然后继续调用自己
+                    //其实这里完成的工作就是"2+3+(2+3*2)"转化成了"2+3+8",也就是用括号中的结果替换括号所在位置
+                    return parse(content.substring(0,index) + ("" + result) + content.substring(endIndex + 1))
+                }else{ //如果没有找到匹配的右括号,把左括号删掉
+                    content=content.substring(0,index)+content.substring(index+1);
+                    return parse(content);
+                }
+            }else{ //如果没有找到左括号,把表达式中的右括号删掉
+                if(content.indexOf("\)")>-1){ //如果有右括号,全部替换成空字符
+                    content=content.replace(/\)/g,""); //替换后更新content
+                    return parse(content); //执行更新后的content
+                }
+            }
+            index = content.indexOf("+"); //找最开始的+号
+            if(index > -1){ //如果有,拆分成两个表达式,进行递归
+                return parse(content.substring(0,index)) + parse(content.substring(index + 1));
+            }
+            index = content.lastIndexOf("\-");
+            while (r2.test(content.substring(0,index))){//如果"-"号前面有其他运算符,将当成负号
+                //更新index,从当前"-"的前面查找"-",循环到"-"号前面没有其他运算符,或者找不到,跳出循环
+                index=content.substring(0,index).lastIndexOf("\-");
+            }
+            if(index>-1){
+                //如果找到前面没有其他运算符号的"-",从当前index拆分相减,没找到执行其他符号的运算
+                return parse(content.substring(0,index)) - parse(content.substring(index + 1));
+            }
+            index = content.indexOf("×");
+            if(index > -1){
+                return parse(content.substring(0,index)) * parse(content.substring(index + 1));
+            }
+            index = content.lastIndexOf("÷"); //除号和减号需要从最后个开始拆分,这样才能使前面的表达式先执行,保证结果正确
+            if(index > -1){
+                return parse(content.substring(0,index)) / parse(content.substring(index + 1));
+            }
+            if("" == content){ //如果内容为空返回0
+                return 0;
+            }else{
+                //递归到最后得到的是没有运算符的内容,不为空的话,就是一个数字字符串,字符串减0隐式转换成数字
+                return content-0;
+            }
+        }
+    }
+    calculator1();
+  /*计算器二功能 E*/
+</script>
+</html>
