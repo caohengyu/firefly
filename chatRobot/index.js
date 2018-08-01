@@ -187,9 +187,8 @@ window.onload=function () {
         };
         $.ajax({
             url:"https://api.asilu.com/weather_v2/",
-14          type: "GET",
-15          dataType: "jsonp", //指定服务器返回的数据类型
-16          success: func
+            dataType: "jsonp", //指定服务器返回的数据类型
+            success: func
         })
     }
 
