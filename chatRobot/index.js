@@ -176,8 +176,7 @@ window.onload=function () {
         var dayWeather=document.querySelector('.dweather');
         var nightWeather=document.querySelector('.nweather');
 
-        var func=function(d) {
-            var data=JSON.parse(d);
+        var func=function(data) {
             city.textContent=data["forecasts"][0]["city"];
             date.textContent=data["forecasts"][0]["casts"][0]["date"];
             week.textContent=data["forecasts"][0]["casts"][0]["week"];
@@ -186,12 +185,12 @@ window.onload=function () {
             dayWeather.textContent=data["forecasts"][0]["casts"][0]["dayweather"];
             nightWeather.textContent=data["forecasts"][0]["casts"][0]["nightweather"];
         };
-        var xhr=new XMLHttpRequest();
-        xhr.open("get","https://api.asilu.com/weather_v2/");
-        xhr.onload=function () {
-            func(xhr.responseText);
-        };
-        xhr.send();
+        $.ajax({
+            url:"https://api.asilu.com/weather_v2/",
+14          type: "GET",
+15          dataType: "jsonp", //指定服务器返回的数据类型
+16          success: func
+        })
     }
 
     getWeather();
