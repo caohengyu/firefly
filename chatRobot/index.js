@@ -327,12 +327,10 @@ window.onload=function () {
                 my_audio.onprogress=function () {
                     loadMsg.textContent='加载中 请稍候...'
                 };
-//                 my_audio.onprogress=function () {
-//                     loadMsg.textContent='加载中 请稍候...'
-//                 };
-//                 my_audio.oncanplaythrough=function () {
-//                     loadMsg.innerHTML='制作by chy<br>感谢使用!'
-//                 };
+
+                my_audio.oncanplay=function () {
+                    loadMsg.innerHTML='制作by chy<br>感谢使用!'
+                };
 
                 //元数据加载完后更新音频总时长
                 function showTime(o,t) {
