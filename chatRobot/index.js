@@ -285,6 +285,7 @@ window.onload=function () {
                     my_audio.src=musics[index]['src'];
                     my_audio.load();
                     curBar.style.width=0;
+                    point.style.left=0;
                     curTime.textContent='00:00';
                     if(!p) my_audio.play();
                 },false);
@@ -295,6 +296,7 @@ window.onload=function () {
                     my_audio.src=musics[index]['src'];
                     my_audio.load();
                     curBar.style.width=0;
+                    point.style.left=0;
                     curTime.textContent='00:00';
                     if(!p) my_audio.play();
                 },false);
