@@ -33,7 +33,7 @@ body{
     height: 100%;
     padding-bottom: 80px;
     overflow: auto;
-    background-color: rgba(222, 183, 25,0.333);
+    background-color: rgba(222, 183, 25,0.2);
 }
 .box ul.chat-box{
     width: 100%;
@@ -51,11 +51,11 @@ footer ul.menu{
     text-align: center;
     cursor: pointer;
     font-size: 18px;
-    background: rgba(252, 234, 30, 0.5);
+    background: rgba(252, 234, 30, 0.3);
     color: #0500ff;
 }
 .menu li.active{
-    background-color: rgba(8, 8, 255, 0.8);
+    background-color: rgba(8, 8, 255, 0.3);
     color: #fcea1e;
 }
 .chat-box li{
@@ -213,12 +213,12 @@ footer .audio{
 .control .play-btn.play{
     background-color: #fffaef;
     box-shadow: 0 0 30px #fffd00;
-    color: rgba(21, 7, 10, 0.89);
+    color: rgba(21, 7, 10, 0.66);
 }
 .control .play-btn.pause{
-    background-color: #000000;
+    background-color: #111;
     box-shadow: 0 0 15px #fff9ff inset;
-    color: #fffdb9;
+    color: #db9;
 }
 
 .audio .bar{
@@ -265,7 +265,7 @@ footer .audio{
     line-height: 30px;
     font-size: 18px;
     text-align: center;
-    background-color: rgba(222, 183, 25,0.666);
+    background-color: rgba(222, 183, 25,0.5);
     overflow: hidden;
     position: relative;
 }
@@ -307,7 +307,7 @@ footer .audio{
     cursor: pointer;
 }
 .audio .order li.active{
-    background-color: rgba(255, 100, 10, 0.88);
+    background-color: rgba(255, 100, 10, 0.6);
     box-shadow: 0 0 10px #fffd00;
     color: #fffbc6;
     font-size: 18px;
