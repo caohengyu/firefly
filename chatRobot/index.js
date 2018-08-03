@@ -226,7 +226,7 @@ window.onload=function () {
                 var musicList=[]; //存放已随机播放的index
                 var index=0; //当前播放位置,默认为0
                 my_audio.src=musics[index]['src']; //初始化播放器的src
-                
+                my_audio.load();
                 //更新下一个要播放的index
                 function nextMusic() {
                     if(order==0){
@@ -324,9 +324,10 @@ window.onload=function () {
                 //显示加载中,可以播放时去掉
                 var loadMsg=document.getElementById('loadMsg');
                 my_audio.onprogress=function () {
+                    if(!my_audio.paused)
                     loadMsg.textContent='加载中 请稍候...'
                 };
-
+                
                 //更新音频时长
                 function showTime(o,t) {
                     //显示时间函数
