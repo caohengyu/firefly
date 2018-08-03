@@ -323,11 +323,17 @@ window.onload=function () {
                 //显示加载中,可以播放时去掉
                 var loadMsg=document.getElementById('loadMsg');
                 my_audio.onloadstart=function () {
+                    loadMsg.textContent='开始加载...'
+                };
+                my_audio.onprogress=function () {
                     loadMsg.textContent='加载中 请稍候...'
                 };
-                my_audio.oncanplaythrough=function () {
-                    loadMsg.innerHTML='制作by chy<br>感谢使用!'
-                };
+//                 my_audio.oncanplay=function () {
+//                     loadMsg.innerHTML='制作by chy<br>感谢使用!'
+//                 };
+//                 my_audio.oncanplaythrough=function () {
+//                     loadMsg.innerHTML='制作by chy<br>感谢使用!'
+//                 };
 
                 //元数据加载完后更新音频总时长
                 function showTime(o,t) {
@@ -354,6 +360,7 @@ window.onload=function () {
                 my_audio.ontimeupdate=function () {
                     var ct=my_audio.currentTime;
                     updateBt(ct,mDuration);
+                    loadMsg.innerHTML='制作by chy<br>感谢使用!'
                 };
                 function updateBt (c,d) {
                     curBar.style.width=c/d*100+'%';
