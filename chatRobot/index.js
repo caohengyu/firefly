@@ -322,7 +322,7 @@ window.onload=function () {
 
                 //显示加载中,可以播放时去掉
                 var loadMsg=document.getElementById('loadMsg');
-                my_audio.onwaiting=function () {
+                my_audio.onprogress=function () {
                     loadMsg.textContent='加载中 请稍候...'
                 };
 //                 my_audio.onprogress=function () {
