@@ -226,10 +226,9 @@ window.onload=function () {
                 var musicList=[]; //存放已随机播放的index
                 var index=0; //当前播放位置,默认为0
                 my_audio.src=musics[index]['src']; //初始化播放器的src
-                //my_audio.load(); //载入
+                
                 //更新下一个要播放的index
                 function nextMusic() {
-
                     if(order==0){
                         if(index==musics.length-1)
                             index=0;
@@ -328,11 +327,7 @@ window.onload=function () {
                     loadMsg.textContent='加载中 请稍候...'
                 };
 
-                my_audio.oncanplay=function () {
-                    loadMsg.innerHTML='制作by chy<br>感谢使用!'
-                };
-
-                //元数据加载完后更新音频总时长
+                //更新音频时长
                 function showTime(o,t) {
                     //显示时间函数
                     var m=parseInt(t/60); //分
