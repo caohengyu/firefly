@@ -130,12 +130,11 @@ window.onload=function () {
             my_Music();
 
             //为切换按钮容器绑定点击事件
-            menu.addEventListener('click',function (e) {
-                var lis=menu.querySelectorAll('li'); //按钮数组
-                var ele=e.target; //触发点击的按钮
-                var dataMenu=ele.getAttribute("data-menu");
-                //判断点击的按钮是否改变,不改变就返回
-                if(index!==dataMenu){
+            var lis=menu.querySelectorAll('li'); //按钮数组
+            lis.forEach(function(li){
+                li.addEventListener('click',function(){
+                    var dataMenu=li.getAttribute("data-menu");
+                    if(index!==dataMenu){
                     //清除已激活样式 清除已绑定事件函数
                     lis[index].classList.remove('active');
                     if(f_click)//判断有绑定则移除
@@ -162,7 +161,7 @@ window.onload=function () {
                     }
 
                     //添加样式 绑定事件处理函数
-                    lis[index].classList.add('active');
+                    li.classList.add('active');
 
                     if(index!=1){
                         //隐藏音乐播放器
@@ -182,8 +181,17 @@ window.onload=function () {
 
                 }else{
                     return false;
-                }
-            },false);
+                    }                              
+                },false)           
+            
+            })
+//             menu.addEventListener('click',function (e) {
+//                 var ele=e.target; //触发点击的按钮
+//                 var lis=menu.querySelectorAll('li'); //按钮数组
+//                 var dataMenu=ele.getAttribute("data-menu");
+//                 //判断点击的按钮是否改变,不改变就返回
+//                 
+//             },false);
 
         }
         tapSwitch();
