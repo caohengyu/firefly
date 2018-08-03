@@ -322,14 +322,11 @@ window.onload=function () {
 
                 //显示加载中,可以播放时去掉
                 var loadMsg=document.getElementById('loadMsg');
-                my_audio.onloadstart=function () {
+                my_audio.onwaiting=function () {
                     loadMsg.textContent='加载中 请稍候...'
                 };
 //                 my_audio.onprogress=function () {
 //                     loadMsg.textContent='加载中 请稍候...'
-//                 };
-//                 my_audio.oncanplay=function () {
-//                     loadMsg.innerHTML='制作by chy<br>感谢使用!'
 //                 };
 //                 my_audio.oncanplaythrough=function () {
 //                     loadMsg.innerHTML='制作by chy<br>感谢使用!'
