@@ -129,7 +129,7 @@ window.onload=function () {
             //调用音乐播放器
             my_Music();
 
-            //为切换按钮容器绑定点击事件
+            //为切换按钮绑定点击事件
             var lis=menu.querySelectorAll('li'); //按钮数组
             lis.forEach(function(li){
                 li.addEventListener('click',function(){
@@ -185,14 +185,6 @@ window.onload=function () {
                 },false)           
             
             })
-//             menu.addEventListener('click',function (e) {
-//                 var ele=e.target; //触发点击的按钮
-//                 var lis=menu.querySelectorAll('li'); //按钮数组
-//                 var dataMenu=ele.getAttribute("data-menu");
-//                 //判断点击的按钮是否改变,不改变就返回
-//                 
-//             },false);
-
         }
         tapSwitch();
 
