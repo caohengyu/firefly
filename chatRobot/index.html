@@ -4,25 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="index.css">
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="index.js"></script>
-    <title>chatRobot</title>
+    <title>Hello World</title>
 </head>
 <body>
 <div class="top">
-    <p><span class="city">广州市</span>&nbsp;&nbsp;<span class="date">2018-08-01</span>&nbsp;&nbsp;星期<span class="week">3</span></p>
-    <p><span class="dtemp">32℃</span>~<span class="ntemp">27℃</span>&nbsp;&nbsp;白天<span class="dweather">雷阵雨</span>&nbsp;&nbsp;夜晚 <span class="nweather">多云</span></p>
+    <p><span class="city"></span>&nbsp;&nbsp;<span class="date"></span>&nbsp;&nbsp;星期<span class="week"></span></p>
+    <p><span class="dtemp"></span>℃~<span class="ntemp"></span>℃&nbsp;&nbsp;白天 <span class="dweather"></span>&nbsp;&nbsp;夜晚 <span class="nweather"></span></p>
 </div>
 <div class="container">
     <div class="box">
-        <ul class="chat-box">
-        </ul>
+        <div class="words"><span id="words"></span></div>
+        <ul class="chat-box"></ul>
     </div>
     <footer>
-        <textarea class="text" placeholder="请输入聊天内容" ></textarea><button class="btn">发送</button><button class="clear">清除聊天内容</button>
+        <div id="text">
+            <textarea class="text" placeholder="请输入聊天内容" ></textarea><button class="btn">发送</button><button class="clear">清除聊天内容</button>
+        </div>
+        <div class="audio">
+            <audio src="musics/Way Back Into Love.mp3" id="music"></audio>
+            <ul class="order">
+                <li class="active" data-order=0>顺序</li>
+                <li data-order=1>随机</li>
+                <li data-order=2>循环</li>
+            </ul>
+            <p id="nowPlay"></p>
+            <div class="control">
+                <div class="play-btn pause">点我<br/>播放</div>
+                <div class="load-msg" id="loadMsg"></div>
+            </div>
+            <div class="bar"><div class="pro-bar"></div><span class="point"></span></div>
+            <div class="time">
+                <span class="current-time">00:00</span>&nbsp;/&nbsp;<span class="total-time">00:00</span>
+                <div class="pre">上一首</div>
+                <div class="next">下一首</div>
+            </div>
+        </div>
         <ul class="menu">
-            <li class="active" data-menu=0>聊天</li>
-            <li data-menu=1>音乐</li>
+            <li data-menu=0>聊天</li>
+            <li class="active" data-menu=1>音乐</li>
             <li data-menu=2>天气</li>
             <li data-menu=3>翻译</li>
             <li data-menu=4>计算</li>
