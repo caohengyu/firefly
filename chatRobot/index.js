@@ -500,7 +500,7 @@ window.onload=function () {
                 init();
                 /*robotLi的聊天内容获取*/
                 jsonp({
-                    url:'http://fanyi.youdao.com/openapi.do?keyfrom=Skykai521&key=977124034&type=data&doctype=jsonp&version=1.1',
+                    url:'https://fanyi.youdao.com/openapi.do?keyfrom=Skykai521&key=977124034&type=data&doctype=jsonp&version=1.1',
                     data:{q:str},
                     success:function (data) {
                         var text=data['translation'][0];
