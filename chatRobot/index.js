@@ -226,7 +226,7 @@ window.onload=function () {
                 var musicList=[]; //存放已随机播放的index
                 var index=0; //当前播放位置,默认为0
                 my_audio.src=musics[index]['src']; //初始化播放器的src
-                my_audio.load(); //载入
+                //my_audio.load(); //载入
                 //更新下一个要播放的index
                 function nextMusic() {
 
