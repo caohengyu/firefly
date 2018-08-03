@@ -16,7 +16,17 @@ body{
     height: 68%;
     position: absolute;
     left: 16%;
-    bottom: 16%;
+    bottom: 18%;
+}
+.box .words{
+    width: 90%;
+    position: absolute;
+    left: 5%;
+    top: 10px;
+}
+.box .words span{
+    font-size: 15px;
+    line-height: 20px;
 }
 .box{
     width: 100%;
@@ -39,7 +49,6 @@ footer ul.menu{
     line-height: 30px;
     width: 20%;
     text-align: center;
-    border-bottom: 1px solid #ccc;
     cursor: pointer;
     font-size: 18px;
     background: rgba(252, 234, 30, 0.5);
@@ -68,7 +77,6 @@ img{
     line-height: 30px;
     width: 80%;
     overflow: hidden;
-    word-break:break-all;
     white-space:pre-wrap; /*保留空白和换行*/
     color: #050239;
     position: relative;
@@ -108,7 +116,7 @@ footer{
     text-align: left;
 }
 .text{
-    width: 60%;
+    width: 68%;
     border: none;
     height: 50px;
     line-height: 25px;
@@ -134,7 +142,6 @@ footer{
 }
 .clear{
     width: 100px;
-    float: right;
     font-size: 14px;
     height: 30px;
     line-height: 30px;
@@ -152,6 +159,156 @@ footer{
 .top p{
     width: 100%;
     text-align: center;
-    font-size: 20px;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+/*音乐*/
+footer .audio{
+    width: 100%;
+    height: 150px;
+    margin-top: -100px;
+    position: relative;
+}
+.audio audio{
+    height: 0;
+}
+.audio p:first-of-type{
+    width: 90%;
+    margin: 0 auto;
+    font-size: 12px;
+    color: rgba(6, 6, 6, 0.8);
+    font-weight: 500;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    height: 35px;
+    overflow: hidden;
+}
+.audio .control{
+    width: 100%;
+    height: 60px;
+    margin: 5px auto;
+    position: relative;
+}
+.audio .control .play-btn{
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+    border-radius: 30px;
+    text-align: center;
+    font: bold 15px/20px sans-serif;
+    padding-top: 10px;
+    cursor: pointer;
+}
+.audio .control .load-msg{
+    position: absolute;
+    bottom: 5px;
+    right: 5%;
+    height: 50px;
+    line-height: 25px;
+    font-size: 12px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.8);
+}
+.control .play-btn.play{
+    background-color: #fffaef;
+    box-shadow: 0 0 30px #fffd00;
+    color: rgba(21, 7, 10, 0.89);
+}
+.control .play-btn.pause{
+    background-color: #000000;
+    box-shadow: 0 0 15px #fff9ff inset;
+    color: #fffdb9;
+}
+
+.audio .bar{
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 5px;
+    height: 5px;
+    background-color: #666;
+    border-radius: 3px;
+    position: relative;
+}
+.audio .bar .pro-bar{
+    width: 0;
+    height: 5px;
+    border-radius: 3px;
+    background-color: rgba(255, 6, 6, 0.66);
+}
+.audio .bar .point{
+    width: 15px;
+    height: 15px;
+    border-radius: 7.5px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-left: -7.5px;
+    margin-top: -5px;
+    background-color: #ccc;
+    cursor: pointer;
+}
+.audio .bar .point:before{
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    width: 5px;
+    height: 5px;
+    border-radius: 2.5px;
+    background-color: #666;
+}
+.audio .time{
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 5px;
     line-height: 30px;
+    font-size: 18px;
+    text-align: center;
+    background-color: rgba(222, 183, 25,0.666);
+    overflow: hidden;
+    position: relative;
+}
+.audio .pre,.audio .next{
+    position: absolute;
+    line-height: 30px;
+    width: 25%;
+    font-size: 15px;
+    top: 0;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    background-color: rgba(190, 0, 255, 0.5);
+}
+.audio .pre{
+    left: 0;
+}
+.audio .next{
+    right: 0;
+}
+.audio .order{
+    width: 60%;
+    position: absolute;
+    left: 20%;
+    top: -30px;
+    height: 30px;
+    list-style: none;
+}
+.audio .order li{
+    width: 30%;
+    line-height: 30px;
+    font-size: 15px;
+    color: #fff;
+    background-color: rgba(255, 150, 0, 0.5);
+    float: left;
+    text-align: center;
+    margin-right: 3%;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.audio .order li.active{
+    background-color: rgba(255, 100, 10, 0.88);
+    box-shadow: 0 0 10px #fffd00;
+    color: #fffbc6;
+    font-size: 18px;
 }
