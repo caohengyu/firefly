@@ -314,12 +314,12 @@ window.onload=function () {
                         my_audio.play(); //开始播放当前音频
                         this.classList.remove('pause');//移除样式
                         this.classList.add('play');//添加样式
-                        this.innerHTML='点它<br>暂停';
+                        this.innerHTML='暂停';
                     }else{
                         my_audio.pause();
                         this.classList.remove('play');//移除样式
                         this.classList.add('pause');//添加样式
-                        this.innerHTML='点它<br>播放';
+                        this.innerHTML='播放';
                     }
                 },false);
 
