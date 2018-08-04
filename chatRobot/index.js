@@ -334,7 +334,7 @@ window.onload=function () {
                 var loadMsg=document.getElementById('loadMsg');
                 my_audio.onprogress=function () {
                     if(!my_audio.paused)
-                    loadMsg.textContent='加载中 请稍候...'
+                    loadMsg.textContent='加载中...'
                 };
                 my_audio.onwaiting=function () {
                     if(!my_audio.paused)
@@ -366,7 +366,11 @@ window.onload=function () {
                 my_audio.ontimeupdate=function () {
                     var ct=my_audio.currentTime;
                     updateBt(ct,mDuration);
-                    loadMsg.innerHTML='制作by chy<br>感谢使用!'
+                    if(my_audio.networkState==2){
+                        loadMsg.innerHTML='制作by chy<br>感谢使用!'
+                    }else if(my_audio.networkState==1){
+                        loadMsg.innerHTML='网络不稳定<br>可能会停止播放'
+                    }
                 };
                 function updateBt (c,d) {
                     curBar.style.width=c/d*100+'%';
