@@ -75,7 +75,7 @@ img{
 .container .chat-box p{
     font-size: 15px;
     line-height: 30px;
-    width: 95%;
+    width: 85%;
     overflow: hidden;
     white-space:pre-wrap; /*保留空白和换行*/
     color: #050239;
