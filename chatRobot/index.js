@@ -329,6 +329,10 @@ window.onload=function () {
                     if(!my_audio.paused)
                     loadMsg.textContent='加载中 请稍候...'
                 };
+                my_audio.onwaiting=function () {
+                    if(!my_audio.paused)
+                    loadMsg.textContent='加载中 请稍候...'
+                };
                 
                 //更新音频时长
                 function showTime(o,t) {
