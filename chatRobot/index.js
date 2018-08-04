@@ -17,7 +17,7 @@ window.onload=function () {
             if(o.length){
                 t=t&&t>5?t*1000:5000;
                 var randomNum=Math.floor(Math.random()*o.length);
-                var url='url(https://cms-origin-cn.battle.net/cms/template_resource/Q78CCH1ADTQ51509569826966.png),';
+                var url='url(https://cms-origin-cn.battle.net/cms/template_resource/8YNO3TMV46C01509569825960.png),';
                 body.style.backgroundImage=url+'url('+o[randomNum]+')';
                 var timer=setInterval(function () {
                     randomNum=Math.floor(Math.random()*o.length);
