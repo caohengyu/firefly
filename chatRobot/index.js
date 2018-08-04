@@ -120,6 +120,13 @@ window.onload=function () {
                 chatBox.innerHTML=""; //删除聊天框所有的元素
             },false);
         })();
+        //监听当输入框按下enter键执行发送功能
+        txt.onkeydown=function (e) {
+            if(e.keyCode==13){ //判断是否是enter
+                e.preventDefault(); //阻止enter默认的换行
+                f_click(); //执行发送按钮的点击事件函数
+            }
+        };
 
         //切换功能函数
         function tapSwitch() {
