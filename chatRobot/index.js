@@ -231,7 +231,7 @@ window.onload=function () {
 
                 var order=0; //记录播放顺序 顺序0 随机1 循环2 默认0
                 var musicList=[]; //存放已随机播放的index
-                var index=0; //当前播放位置,默认为0
+                var index=Math.floor(Math.random()*musics.length); //当前播放位置
                 my_audio.src=musics[index]['src']; //初始化播放器的src
                 my_audio.load();
                 //更新下一个要播放的index
