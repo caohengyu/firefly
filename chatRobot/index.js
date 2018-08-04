@@ -259,7 +259,8 @@ window.onload=function () {
                     ele.addEventListener('click',function (e) {
                         var liOrder=this.getAttribute('data-order');
                         if(liOrder!==order){
-                            musicList=[];//重置已随机播放数组
+                            if(liOrder==1)   //当前选择的是随机顺序
+                                musicList=[];//重置已随机播放数组
                             //重置样式
                             arr[order].classList.remove('active');
                             this.classList.add('active');
