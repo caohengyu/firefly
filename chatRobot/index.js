@@ -237,9 +237,11 @@ window.onload=function () {
                 //更新下一个要播放的index
                 function nextMusic() {
                     if(order==0){
-                        if(index==musics.length-1)
+                        if(index<musics.length-1){
+                            index++;
+                        }else{
                             index=0;
-                        index++;
+                        }
                     }else if(order==1){
                         //已播放满就清空数组
                         if(musicList.length==musics.length)
