@@ -78,12 +78,14 @@ img{
     width: 85%;
     overflow: hidden;
     white-space:pre-wrap; /*保留空白和换行*/
-    color: #050239;
     position: relative;
     padding-left: 50px;
 }
-.robot{
-    color: #340716;
+.container .chat-box p.robot{
+    color: #000;
+}
+.container .chat-box p.me{
+    color: #000;
 }
 .robot::before{
     content: "robot:";
@@ -93,9 +95,6 @@ img{
     position: absolute;
     left: 0;
     top: 0;
-}
-.me{
-    color: #00007c;
 }
 .me::before{
     width: 50px;
