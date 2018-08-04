@@ -190,6 +190,19 @@ footer .audio{
     margin: 5px auto;
     position: relative;
 }
+.audio .control .source{
+    position: absolute;
+    left: 5%;
+    top: 0;
+    width: 25%;
+    height: 60px;
+    text-align: center;
+}
+.control .source>a{
+    font-size: 15px;
+    line-height: 60px;
+    color: rgba(15, 15, 255, 0.8);
+}
 .audio .control .play-btn{
     width: 60px;
     height: 60px;
