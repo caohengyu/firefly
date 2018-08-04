@@ -727,7 +727,7 @@ window.onload=function () {
         var func=function (data) {
             city.textContent=data["forecasts"][0]["city"];
             date.textContent=data["forecasts"][0]["casts"][0]["date"];
-            week.textContent=data["forecasts"][0]["casts"][0]["week"];
+            week.textContent=(data["forecasts"][0]["casts"][0]["week"]!=7)?data["forecasts"][0]["casts"][0]["week"]:'天';
             dayTemp.textContent=data["forecasts"][0]["casts"][0]["daytemp"];
             nightTemp.textContent=data["forecasts"][0]["casts"][0]["nighttemp"];
             dayWeather.textContent=data["forecasts"][0]["casts"][0]["dayweather"];
