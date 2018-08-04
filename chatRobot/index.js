@@ -246,7 +246,7 @@ window.onload=function () {
                             musicList=[];
                         var length=musics.length;
                         var ranNum=Math.floor(Math.random()*length);
-                        while (ranNum==index&&musicList.includes(index)){
+                        while (ranNum==index||musicList.includes(ranNum)){
                             ranNum=Math.floor(Math.random()*length);
                         }
                         index=ranNum;
