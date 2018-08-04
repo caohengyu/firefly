@@ -336,7 +336,7 @@ window.onload=function () {
                     if(!my_audio.paused)
                     loadMsg.textContent='加载中 请稍候...'
                 };
-                my_audio.onwaiting=function () {
+                my_audio.onerror=function () {
                     if(!my_audio.paused)
                     loadMsg.textContent='当前网络不稳定...'
                 };
