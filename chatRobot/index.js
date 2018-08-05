@@ -407,30 +407,21 @@ window.onload=function () {
                 };
 
                 /*拖动进度点播放功能*/
-                //pc端拖动功能
-                function pcDrag() {
-                    var isDrag=false;
+               //pc端拖动功能
+               function pcDrag() {
                     point.onmousedown=function (e) {
                         if(e.target!=point) return false;
                         if(!my_audio.paused||my_audio.currentTime>0){
-                            isDrag=true;
                             var moveX=e.clientX; //拖动前的X坐标
                             var oLeft=curBar.offsetWidth; //存放拖动前的已播放距离 后续会在这个基础上增加或减少
-
+                            e.preventDefault();
                             document.onmousemove=function (e) {
-                                if(e.target==point||e.target==bar||e.target==curBar) {
-                                    if(isDrag){
-                                        var length=e.clientX-moveX; //X坐标改变距离
-                                        var rate=(oLeft+length)/bar.offsetWidth;
-                                        my_audio.currentTime=mDuration*rate;
-                                        updateBt(my_audio.currentTime,mDuration);
-                                    }
-                                }else{
-                                    return false;  //阻止其他元素触发事件
-                                }
+                                var length = e.clientX - moveX; //X坐标改变距离
+                                var rate = (oLeft + length) / bar.offsetWidth;
+                                my_audio.currentTime = mDuration * rate;
+                                updateBt(my_audio.currentTime, mDuration);
                             };
                             document.onmouseup=function(){
-                                isDrag=false;
                                 document.onmousemove=null;
                                 document.onmouseup=null;
                             }
@@ -450,10 +441,9 @@ window.onload=function () {
                     point.ontouchstart=function (e) {
                         if(!my_audio.paused||my_audio.currentTime>0){
                             curWidth=curBar.offsetWidth; //保存开始滑动时的已播放距离
-                            startX=e.targetTouches[0].clientX; //保存开始滑动的X坐标
-
+                            startX=e.touches[0].clientX; //保存开始滑动的X坐标
+                            e.preventDefault();
                             point.addEventListener('touchmove',tMove,false);
-
                             point.ontouchend=function () {
                                 if(isMove)
                                     point.removeEventListener('touchmove',tMove,false);
@@ -461,7 +451,7 @@ window.onload=function () {
                                 point.ontouchend=null;
                             };
                             function tMove(e) {
-                                var moveX=e.targetTouches[0].clientX; //滑动后的X坐标
+                                var moveX=e.touches[0].clientX; //滑动后的X坐标
                                 lengthX=moveX-startX;
 
                                 //滑动
@@ -481,7 +471,7 @@ window.onload=function () {
             xhr.send();
 
         }
-
+        
         //天气查询
         function getWeather() {
             /*获取输入框的内容*/
