@@ -177,13 +177,14 @@ window.onload=function () {
                         //显示输入框
                         document.getElementById('text').style.display='block';
                         btn.addEventListener('click',f_click,false);
+                        chatBox.style.display='block'; //显示聊天内容
                     }else{
                         //显示播放器
                         document.querySelector('footer .audio').style.display='block';
                         document.getElementById('words').style.display='block';
                         //隐藏输入框
                         document.getElementById('text').style.display='none';
-                        chatBox.innerHTML=""; //清除聊天框内容
+                        chatBox.style.display='none'; //隐藏聊天内容
                     }
 
                 }else{
