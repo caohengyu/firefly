@@ -10,6 +10,7 @@ body{
     background-position: center,center;
     background-size: cover,cover;
     background-repeat: no-repeat,no-repeat;
+    -webkit-text-size-adjust: none;
 }
 .container{
     width: 90%;
@@ -128,6 +129,8 @@ footer{
     outline: none;
     resize: none;
     background-color: rgba(255,250,230,0.8);
+    -webkit-appearance: none;
+    border-radius:0;
 }
 .btn,.clear{
     border: none;
@@ -322,7 +325,7 @@ footer .audio{
     background-color: rgba(255, 150, 0, 0.3);
     float: left;
     text-align: center;
-    margin-right: 8%;
+    margin-right: 6.25%;
     border-radius: 10px;
     cursor: pointer;
 }
