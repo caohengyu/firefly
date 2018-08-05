@@ -241,12 +241,14 @@ footer .audio{
     background-color: rgba(102, 102, 102, 0.6);
     border-radius: 3px;
     position: relative;
+    -webkit-tap-highlight-color: transparent;
 }
 .audio .bar .pro-bar{
     width: 0;
     height: 5px;
     border-radius: 3px;
     background-color: rgba(255, 6, 6, 0.6);
+    -webkit-tap-highlight-color: transparent;
 }
 .audio .bar .point{
     width: 15px;
@@ -259,6 +261,7 @@ footer .audio{
     margin-top: -5px;
     background-color: #ccc;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 .audio .bar .point:before{
     content: "";
