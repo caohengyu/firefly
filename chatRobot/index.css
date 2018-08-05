@@ -80,6 +80,7 @@ img{
     line-height: 30px;
     width: 85%;
     overflow: hidden;
+    word-break: break-all;
     white-space:pre-wrap; /*保留空白和换行*/
     position: relative;
     padding-left: 50px;
