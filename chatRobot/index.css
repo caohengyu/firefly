@@ -34,6 +34,7 @@ body{
     width: 100%;
     height: 100%;
     padding-bottom: 80px;
+    padding-top: 55px;
     overflow: auto;
 }
 .box ul.chat-box{
@@ -63,9 +64,6 @@ footer ul.menu{
     width: 100%;
     border-top: 0.1px solid transparent;
     margin-top: 5px;
-}
-.chat-box li:first-child{
-    margin-top: 60px;
 }
 .chat-box li:before,.chat-box li:after{
     content: "";
