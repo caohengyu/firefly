@@ -119,7 +119,7 @@ footer{
     text-align: left;
 }
 .text{
-    width: 68%;
+    width: 70%;
     border: none;
     height: 50px;
     line-height: 25px;
@@ -136,7 +136,7 @@ footer{
     font-size: 18px;
     background-color: rgba(17, 156, 28, 0.8);
     color: #efd8ff;
-    width: 25%;
+    width: 30%;
     outline: none;
 }
 .btn:hover{
