@@ -63,6 +63,9 @@ footer ul.menu{
     border-top: 0.1px solid transparent;
     margin-top: 5px;
 }
+.chat-box li:first-child{
+    margin-top: 60px;
+}
 .chat-box li:before,.chat-box li:after{
     content: "";
     display: table;
