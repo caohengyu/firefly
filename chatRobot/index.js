@@ -53,7 +53,7 @@ window.onload=function () {
 
             /*meLi的聊天内容更新并添加到ul容器中*/
             var meP=document.createElement('p');
-            meP.textContent=str;
+            meP.innerHTML=str;
             meP.classList.add('me');
             meLi.appendChild(meP);
 
