@@ -39,7 +39,9 @@ window.onload=function () {
         var str=''; //存放输入的内容
         var meLi,robotLi; //存放聊天内容
         var menu=document.querySelector('footer .menu');//切换按钮的容器
+        var songList=document.querySelector('#songList'); //歌单
         var f_click=null; //存放发送按钮事件函数
+        var musicUrl='musics.json'; //歌曲json数据的url
 
 
         //获取输入框内容的初始化函数
@@ -80,39 +82,6 @@ window.onload=function () {
 
         }
 
-        //聊天功能
-        function robot () {
-            /*获取输入框的内容*/
-            str=txt.value;
-            if(str.trim()){
-                //初始化
-                init();
-                /*robotLi的聊天内容获取*/
-                var xhr=new XMLHttpRequest();
-                xhr.open('post','//www.tuling123.com/openapi/api');
-                xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
-                xhr.onreadystatechange=function () {
-                    if(xhr.readyState==4){
-                        if(xhr.status==200){
-                            var text=JSON.parse(xhr.responseText)["text"];
-                            text=text?text:'https请求http资源不成功,如果可以,请使用http网址访问';
-                        }else{
-                            text='https请求http资源不成功,如果可以,请使用http网址访问';
-                        }
-                        robotLi.innerHTML+='<p class="robot">'+text+'</p>';
-                        chatBox.appendChild(robotLi);
-                        /*让滚动条保持在最底部*/
-                        box.scrollTop=box.scrollHeight;
-                    }
-                };
-                xhr.send('key=7322a993b5584ee4b9c8855179c40af6&info='+meLi.textContent);
-
-            }else{
-                txt.value='';
-                txt.placeholder="内容为空，请重新输入"
-            }
-        }
-
         /*监听清除按钮，点击清空聊天内容*/
         (function () {
             var cl=document.querySelector('#text .clear');
@@ -130,74 +99,84 @@ window.onload=function () {
 
         //切换功能函数
         function tapSwitch() {
-            var index=1; //存放当前激活按钮的序号,默认为第2个按钮
+            var menuIndex=1; //存放当前激活按钮的序号,默认为第2个按钮
             //隐藏输入框
             document.getElementById('text').style.display='none';
+            songList.style.display='none'; //隐藏歌单
             //调用音乐播放器
-            my_Music();
+            my_Music(musicUrl);
 
             //为切换按钮绑定点击事件
             var lis=menu.querySelectorAll('li'); //按钮数组
             lis.forEach(function(li){
                 li.addEventListener('click',function(){
                     var dataMenu=li.getAttribute("data-menu");
-                    if(index!==dataMenu){
-                    //清除已激活样式 清除已绑定事件函数
-                    lis[index].classList.remove('active');
-                    if(f_click)//判断有绑定则移除
-                        btn.removeEventListener('click',f_click,false);
-                    index=dataMenu; //更新index
-                    // 更新f_click和重置输入框
-                    txt.value='';
-                    switch (index){
-                        case '0':
-                            f_click=robot;
-                            txt.placeholder='请输入聊天内容';
-                            break;
-                        case '2':
-                            f_click=getWeather;
-                            txt.placeholder='请输入城市名查询,如北京';
-                            break;
-                        case '3':
-                            f_click=translation;
-                            txt.placeholder='请输入翻译内容,支持中英文输入';
-                            break;
-                        case '4':
-                            f_click=calculator;
-                            txt.placeholder='请输入计算表达式，支持带括号的四则运算';
-                    }
+                    if(menuIndex!==dataMenu){
+                        //清除已激活样式 清除已绑定事件函数
+                        lis[menuIndex].classList.remove('active');
+                        if(f_click)//判断有绑定则移除
+                            btn.removeEventListener('click',f_click,false);
+                        menuIndex=dataMenu; //更新index
+                        // 更新f_click和重置输入框
+                        txt.value='';
+                        switch (menuIndex){
+                            case '2':
+                                f_click=getWeather;
+                                txt.placeholder='请输入城市名查询,如北京';
+                                break;
+                            case '3':
+                                f_click=translation;
+                                txt.placeholder='请输入翻译内容,支持中英文输入';
+                                break;
+                            case '4':
+                                f_click=calculator;
+                                txt.placeholder='请输入计算表达式，支持带括号的四则运算';
+                        }
 
-                    //添加样式 绑定事件处理函数
-                    li.classList.add('active');
+                        //添加样式 绑定事件处理函数
+                        li.classList.add('active');
 
-                    if(index!=1){
-                        //隐藏音乐播放器
-                        document.querySelector('footer .audio').style.display='none';
-                        document.getElementById('words').style.display='none';
-                        //显示输入框
-                        document.getElementById('text').style.display='block';
-                        btn.addEventListener('click',f_click,false);
-                        chatBox.style.display='block'; //显示聊天内容
+                        if(menuIndex!=1){
+                            //隐藏音乐播放器
+                            document.querySelector('footer .audio').style.display='none';
+                            document.getElementById('words').style.display='none';
+                            if(menuIndex!=0){
+                                //显示输入框
+                                document.getElementById('text').style.display='block';
+                                btn.addEventListener('click',f_click,false);
+                                chatBox.style.display='block'; //显示聊天内容
+                                songList.style.display='none'; //隐藏歌单
+                            }else {
+                                songList.style.display='block'; //显示歌单
+                                listLis[index].scrollIntoView(false); //当前播放滚动到可见位置
+                                //隐藏输入框
+                                document.getElementById('text').style.display='none';
+                                chatBox.style.display='none'; //隐藏聊天内容
+                            }
+
+                        }else{
+                            //显示播放器
+                            document.querySelector('footer .audio').style.display='block';
+                            document.getElementById('words').style.display='block';
+                            //隐藏输入框
+                            document.getElementById('text').style.display='none';
+                            chatBox.style.display='none'; //隐藏聊天内容
+                            songList.style.display='none'; //隐藏歌单
+                        }
+
                     }else{
-                        //显示播放器
-                        document.querySelector('footer .audio').style.display='block';
-                        document.getElementById('words').style.display='block';
-                        //隐藏输入框
-                        document.getElementById('text').style.display='none';
-                        chatBox.style.display='none'; //隐藏聊天内容
+                        return false;
                     }
+                },false)
 
-                }else{
-                    return false;
-                    }                              
-                },false)           
-            
             })
         }
         tapSwitch();
 
         //音乐播放器
-        function my_Music() {
+        var listLis=null;  //存放歌单的歌曲
+        var index=0;   //当前播放位置
+        function my_Music(url) {
             //外层容器
             var outBox=document.querySelector('footer .audio');
             //播放器
@@ -221,10 +200,11 @@ window.onload=function () {
             var pre=outBox.querySelector('.time .pre');
             var next=outBox.querySelector('.time .next');
 
-            //把从musics.json获取信息并存储到本地
+
+            //获取音乐并存储到本地
             var musics=[]; //存放所有的音乐信息
             var xhr=new XMLHttpRequest();
-            xhr.open('get','musics.json');
+            xhr.open('get',url);
             xhr.onload=function () {
                 musics=JSON.parse(xhr.responseText);
 
@@ -232,9 +212,11 @@ window.onload=function () {
 
                 var order=0; //记录播放顺序 顺序0 随机1 循环2 默认0
                 var musicList=[]; //存放已随机播放的index
-                var index=Math.floor(Math.random()*musics.length); //当前播放位置
+                index=Math.floor(Math.random()*musics.length); //当前播放位置
                 my_audio.src=musics[index]['src']; //初始化播放器的src
                 my_audio.load();
+                showList(); //显示歌单
+                updateList(); //更新歌单
                 //更新下一个要播放的index
                 function nextMusic() {
                     if(order==0){
@@ -259,9 +241,9 @@ window.onload=function () {
 
                 //为顺序按钮组绑定点击事件
                 orderLis.forEach(function (ele,index,arr) {
-                    ele.addEventListener('click',function (e) {
+                    ele.onclick=function () {
                         var liOrder=this.getAttribute('data-order');
-                        if(liOrder!==order){
+                        if(liOrder!=order){
                             musicList=[];//重置已随机播放数组
                             //重置样式
                             arr[order].classList.remove('active');
@@ -271,11 +253,11 @@ window.onload=function () {
                             //相等说明顺序没有切换，直接返回
                             return false;
                         }
-                    },false)
+                    }
                 });
 
                 //为上一首和下一首绑定点击事件处理函数
-                pre.addEventListener('click',function () {
+                pre.onclick=function () {
                     if(order==0){
                         if(index>0){
                             index--
@@ -291,6 +273,7 @@ window.onload=function () {
                         }
                     }
                     showName();
+                    updateList();
                     var p=my_audio.paused;
                     my_audio.src=musics[index]['src'];
                     my_audio.load();
@@ -298,10 +281,11 @@ window.onload=function () {
                     point.style.left=0;
                     curTime.textContent='00:00';
                     if(!p) my_audio.play();
-                },false);
-                next.addEventListener('click',function () {
+                };
+                next.onclick=function () {
                     nextMusic();
                     showName();
+                    updateList();
                     var p=my_audio.paused;
                     my_audio.src=musics[index]['src'];
                     my_audio.load();
@@ -309,22 +293,22 @@ window.onload=function () {
                     point.style.left=0;
                     curTime.textContent='00:00';
                     if(!p) my_audio.play();
-                },false);
+                };
 
                 //播放/暂停功能
-                playButton.addEventListener('click',function () {
+                playButton.onclick=function () {
                     if(my_audio.paused){
                         my_audio.play(); //开始播放当前音频
                         this.classList.remove('pause');//移除样式
                         this.classList.add('play');//添加样式
-                        this.innerHTML='暂停';
+                        this.textContent='暂停';
                     }else{
                         my_audio.pause();
                         this.classList.remove('play');//移除样式
                         this.classList.add('pause');//添加样式
-                        this.innerHTML='播放';
+                        this.textContent='播放';
                     }
-                },false);
+                };
 
                 //显示歌曲名字方法,index改变时执行
                 function showName() {
@@ -337,13 +321,13 @@ window.onload=function () {
                 var loadMsg=document.getElementById('loadMsg');
                 my_audio.onprogress=function () {
                     if(!my_audio.paused)
-                    loadMsg.textContent='加载中 请稍候...'
+                        loadMsg.textContent='加载中 请稍候...'
                 };
                 my_audio.onerror=function () {
                     if(!my_audio.paused)
-                    loadMsg.textContent='当前网络不稳定...'
+                        loadMsg.textContent='当前网络不稳定...'
                 };
-                
+
                 //更新音频时长
                 function showTime(o,t) {
                     //显示时间函数
@@ -388,6 +372,7 @@ window.onload=function () {
                     audio.load();  //重新加载
                     audio.play();  //播放
                     showName();  //更新歌名
+                    updateList();
                 }
                 //监听播放结束事件 执行自动播放功能
                 my_audio.onended=function () {
@@ -408,8 +393,8 @@ window.onload=function () {
                 };
 
                 /*拖动进度点播放功能*/
-               //pc端拖动功能
-               function pcDrag() {
+                //pc端拖动功能
+                function pcDrag() {
                     point.onmousedown=function (e) {
                         if(e.target!=point) return false;
                         if(!my_audio.paused||my_audio.currentTime>0){
@@ -418,6 +403,11 @@ window.onload=function () {
                             //e.preventDefault();
                             document.onmousemove=function (e) {
                                 var length = e.clientX - moveX; //X坐标改变距离
+                                if(length>(bar.offsetWidth-oLeft)){
+                                    updateBt(mDuration,mDuration);
+                                    document.onmousemove=null;
+                                    return false;
+                                }
                                 var rate = (oLeft + length) / bar.offsetWidth;
                                 my_audio.currentTime = mDuration * rate;
                                 updateBt(my_audio.currentTime, mDuration);
@@ -436,30 +426,29 @@ window.onload=function () {
                     //初始化公共变量
                     var startX=0; //存放开始的X坐标
                     var lengthX=0; //存放X轴距离
-                    var isMove=false; //记录是否滑动过
                     var curWidth=0; //存放已播放距离
 
                     point.ontouchstart=function (e) {
                         if(!my_audio.paused||my_audio.currentTime>0){
                             curWidth=curBar.offsetWidth; //保存开始滑动时的已播放距离
                             startX=e.touches[0].clientX; //保存开始滑动的X坐标
-                            //e.preventDefault();
-                            point.addEventListener('touchmove',tMove,false);
+                            point.ontouchmove=tMove;
                             point.ontouchend=function () {
-                                if(isMove)
-                                    point.removeEventListener('touchmove',tMove,false);
-                                isMove=false;
+                                point.ontouchmove=null;
                                 point.ontouchend=null;
                             };
                             function tMove(e) {
                                 var moveX=e.touches[0].clientX; //滑动后的X坐标
                                 lengthX=moveX-startX;
-
+                                if(lengthX>(bar.offsetWidth-curWidth)){
+                                    updateBt(mDuration,mDuration);
+                                    point.ontouchmove=null;
+                                    return false;
+                                }
                                 //滑动
                                 var rate=(curWidth+lengthX)/bar.offsetWidth;
                                 my_audio.currentTime=mDuration*rate;
                                 updateBt(my_audio.currentTime,mDuration);
-                                isMove=true;
                             }
 
                         }
@@ -467,12 +456,42 @@ window.onload=function () {
 
                 }
                 mMove();
+
+                /*显示歌单*/
+                function showList() {
+                    for(var i=0,mLength=musics.length;i<mLength;i++){
+                        var li=document.createElement('li');
+                        li.setAttribute('data-list',i);
+                        li.textContent=musics[i]['name'];
+                        songList.appendChild(li);
+                    }
+                    listLis=songList.querySelectorAll('li');
+                    songList.onclick=function (e) {
+                        var listNum=e.target.getAttribute('data-list');
+                        listLis[index].classList.remove('now-play');
+                        index=listNum;
+                        updateBt(0,0);
+                        showName();
+                        my_audio.src=musics[index]['src'];
+                        musicList=[];
+                        my_audio.load();
+                        my_audio.play();
+                        listLis[index].classList.add('now-play');
+                        playButton.classList.remove('pause');
+                        playButton.classList.add('play');
+                        playButton.textContent='暂停';
+                    }
+                }
+                function updateList(){
+                    listLis.forEach(function (li) {
+                        li.classList.remove('now-play');
+                    });
+                    listLis[index].classList.add('now-play');
+                }
             };
-
             xhr.send();
-
         }
-        
+
         //天气查询
         function getWeather() {
             /*获取输入框的内容*/
@@ -498,7 +517,7 @@ window.onload=function () {
                 txt.placeholder="内容为空，请重新输入"
             }
         }
-        
+
         //翻译功能
         function translation () {
             /*获取输入框的内容*/
