@@ -415,7 +415,7 @@ window.onload=function () {
                         if(!my_audio.paused||my_audio.currentTime>0){
                             var moveX=e.clientX; //拖动前的X坐标
                             var oLeft=curBar.offsetWidth; //存放拖动前的已播放距离 后续会在这个基础上增加或减少
-                            e.preventDefault();
+                            //e.preventDefault();
                             document.onmousemove=function (e) {
                                 var length = e.clientX - moveX; //X坐标改变距离
                                 var rate = (oLeft + length) / bar.offsetWidth;
@@ -443,7 +443,7 @@ window.onload=function () {
                         if(!my_audio.paused||my_audio.currentTime>0){
                             curWidth=curBar.offsetWidth; //保存开始滑动时的已播放距离
                             startX=e.touches[0].clientX; //保存开始滑动的X坐标
-                            e.preventDefault();
+                            //e.preventDefault();
                             point.addEventListener('touchmove',tMove,false);
                             point.ontouchend=function () {
                                 if(isMove)
