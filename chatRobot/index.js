@@ -355,7 +355,7 @@ window.onload=function () {
                 my_audio.ontimeupdate=function () {
                     var ct=my_audio.currentTime;
                     updateBt(ct,mDuration);
-                    if(my_audio.networkState==2){
+                    if(my_audio.currentTime>0&&my_audio.networkState==2){
                         loadMsg.innerHTML='下载数据中...'
                     }else if(my_audio.networkState==1){
                         loadMsg.innerHTML='制作by chy<br>感谢使用!'
