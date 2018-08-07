@@ -16,10 +16,10 @@ body{
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    transition: background 2s;
-    -moz-transition: background 2s;
-    -webkit-transition: background 2s;
-    -o-transition: background 2s;
+    transition: background 1s;
+    -moz-transition: background 1s;
+    -webkit-transition: background 1s;
+    -o-transition: background 1s;
 }
 .container{
     width: 90%;
