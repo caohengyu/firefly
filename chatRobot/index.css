@@ -282,12 +282,12 @@ footer .audio{
 }
 .control .play-btn.play{
     background-color: rgba(255, 250, 221, 0.7);
-    box-shadow: 0 0 30px #fffd00;
+    box-shadow: 0 0 20px #fff;
     color: rgba(0, 0, 0, 0.6);
 }
 .control .play-btn.pause{
     background-color: rgba(17, 17, 17, 0.6);
-    box-shadow: 0 0 15px #fff9ff inset;
+    box-shadow: 0 0 10px #fff inset;
     color: rgba(200, 200, 200, 0.8);
 }
 
