@@ -10,6 +10,7 @@ body{
     background-position: center,center;
     background-size: cover,cover;
     background-repeat: no-repeat,no-repeat;
+    background-color: #343333;
     -webkit-text-size-adjust: none;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
