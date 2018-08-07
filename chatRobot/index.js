@@ -464,7 +464,7 @@ window.onload=function () {
                     for(var i=0,mLength=musics.length;i<mLength;i++){
                         var li=document.createElement('li');
                         li.setAttribute('data-list',i);
-                        li.textContent=musics[i]['name'];
+                        li.textContent=i+1+'~'+ musics[i]['name'];
                         songList.appendChild(li);
                     }
                     listLis=songList.querySelectorAll('li');
