@@ -468,21 +468,23 @@ window.onload=function () {
                         songList.appendChild(li);
                     }
                     listLis=songList.querySelectorAll('li');
-                    songList.onclick=function (e) {
-                        var listNum=e.target.getAttribute('data-list');
-                        listLis[index].classList.remove('now-play');
-                        index=listNum;
-                        updateBt(0,mDuration);
-                        showName();
-                        my_audio.src=musics[index]['src'];
-                        musicList=[];
-                        my_audio.load();
-                        my_audio.play();
-                        listLis[index].classList.add('now-play');
-                        playButton.classList.remove('pause');
-                        playButton.classList.add('play');
-                        playButton.textContent='暂停';
-                    }
+                     listLis.forEach(function (li) {
+                        li.onclick=function () {
+                            var listNum=this.getAttribute('data-list');
+                            listLis[index].classList.remove('now-play');
+                            index=listNum;
+                            updateBt(0,mDuration);
+                            showName();
+                            my_audio.src=musics[index]['src'];
+                            musicList=[];
+                            my_audio.load();
+                            my_audio.play();
+                            this.classList.add('now-play');
+                            playButton.classList.remove('pause');
+                            playButton.classList.add('play');
+                            playButton.textContent='暂停';
+                        }
+                    })
                 }
                 function updateList(){
                     listLis.forEach(function (li) {
