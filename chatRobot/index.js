@@ -1,6 +1,6 @@
 window.onload=function () {
 
-    /*设置壁纸 每10秒刷新*/
+    /*设置壁纸 每5秒刷新*/
     function bag(t) { //t接收背景切换的秒数
         var body=document.querySelector('body');
         var images;
@@ -17,16 +17,18 @@ window.onload=function () {
             if(o.length){
                 t=t&&t>5?t*1000:5000;
                 var randomNum=Math.floor(Math.random()*o.length);
-                var url='url(https://cms-origin-cn.battle.net/cms/template_resource/8YNO3TMV46C01509569825960.png),';
-                body.style.backgroundImage=url+'url('+o[randomNum]+')';
+               // var url='url(https://cms-origin-cn.battle.net/cms/template_resource/8YNO3TMV46C01509569825960.png),';
+               //  body.style.backgroundImage=url+'url('+o[randomNum]+')';
+                body.style.backgroundImage='url('+o[randomNum]+')';
                 var timer=setInterval(function () {
                     randomNum=Math.floor(Math.random()*o.length);
-                    body.style.backgroundImage=url+'url('+o[randomNum]+')';
+                    //body.style.backgroundImage=url+'url('+o[randomNum]+')';
+                    body.style.backgroundImage='url('+o[randomNum]+')';
                 },t)
             }
         }
     }
-    bag(10);
+    bag(5);
 
     /*主函数*/
     function chatRobot() {
