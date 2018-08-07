@@ -472,7 +472,7 @@ window.onload=function () {
                         var listNum=e.target.getAttribute('data-list');
                         listLis[index].classList.remove('now-play');
                         index=listNum;
-                        updateBt(0,0);
+                        updateBt(0,mDuration);
                         showName();
                         my_audio.src=musics[index]['src'];
                         musicList=[];
