@@ -490,6 +490,37 @@ window.onload=function () {
                     });
                     listLis[index].classList.add('now-play');
                 }
+                
+                 /*移动端手势操作*/
+                function swipe () {
+                    var startY=0;
+                    var isMove=false;
+                    var distanceY=0;
+                    var minDistance=100;
+                    songList.style.transition='transform 0.5s';
+                    songList.style.webkitTransition='transform 0.5s';
+                    songList.ontouchstart=function (e) {
+                        startY=e.targetTouches[0].clientY;
+                    };
+                    songList.ontouchmove=function (e) {
+                        isMove=true;
+                        moveY=e.targetTouches[0].clientY;
+                        distanceY=moveY-startY;
+                    };
+                    songList.ontouchend=function () {
+                        if(isMove&&Math.abs(distanceY)>50&&Math.abs(distanceY)<minDistance){
+                            if(distanceY>0){
+                                this.style.transform='translateY('+ minDistance + 'px)';
+                                this.style.webkitTransform='translateY('+ minDistance + 'px)';
+                            }else{
+                                this.style.webkitTransform='translateY(-'+ minDistance + 'px)';
+                            }
+                            isMove=false;
+                            startY=distanceY=0;
+                        }
+                    }
+                }
+                swipe();
             };
             xhr.send();
         }
