@@ -491,6 +491,7 @@ window.onload=function () {
                         li.classList.remove('now-play');
                     });
                     listLis[index].classList.add('now-play');
+                    listLis[index].scrollIntoView(false); //当前播放滚动到可见位置
                 }
                 
             };
