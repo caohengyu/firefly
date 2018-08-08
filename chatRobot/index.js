@@ -398,17 +398,19 @@ window.onload=function () {
                 //pc端拖动功能
                 function pcDrag() {
                     point.onmousedown=function (e) {
-                        if(e.target!=point) return false;
                         if(!my_audio.paused||my_audio.currentTime>0){
                             var moveX=e.clientX; //拖动前的X坐标
                             var oLeft=curBar.offsetWidth; //存放拖动前的已播放距离 后续会在这个基础上增加或减少
+                            var length=0;
                             //e.preventDefault();
                             document.onmousemove=function (e) {
-                                var length = e.clientX - moveX; //X坐标改变距离
+                                length = e.clientX - moveX; //X坐标改变距离
                                 if(length>(bar.offsetWidth-oLeft)){
                                     updateBt(mDuration,mDuration);
                                     document.onmousemove=null;
                                     return false;
+                                }else if(-length>oLeft){
+                                    length=-oLeft;
                                 }
                                 var rate = (oLeft + length) / bar.offsetWidth;
                                 my_audio.currentTime = mDuration * rate;
@@ -440,12 +442,13 @@ window.onload=function () {
                                 point.ontouchend=null;
                             };
                             function tMove(e) {
-                                var moveX=e.touches[0].clientX; //滑动后的X坐标
-                                lengthX=moveX-startX;
+                                lengthX=e.touches[0].clientX-startX;
                                 if(lengthX>(bar.offsetWidth-curWidth)){
                                     updateBt(mDuration,mDuration);
                                     point.ontouchmove=null;
                                     return false;
+                                }else if(-lengthX>curWidth){
+                                    lengthX=-curWidth;
                                 }
                                 //滑动
                                 var rate=(curWidth+lengthX)/bar.offsetWidth;
@@ -459,6 +462,64 @@ window.onload=function () {
                 }
                 mMove();
 
+                /*音量设置*/
+                function setVolume() {
+                    var vBar=document.getElementById('vBar');
+                    var vProBar=vBar.querySelector('.vol-bar');
+                    var vPoint=vProBar.querySelector('.vol-point');
+                    //点击进度条设置音量
+                    vBar.onclick=function (e) {
+                        if(e.target!=vPoint){
+                            var vBarWidth=this.offsetWidth;
+                            var rate=e.offsetX/vBarWidth;
+                            my_audio.volume=rate;
+                            vProBar.style.width=rate*100+'%';
+                        }
+                    };
+                    //滑动功能
+                    vPoint.onmousedown=function (e) {
+                        var moveX=e.clientX; //拖动前的X坐标
+                        var oLeft=vProBar.offsetWidth;
+                        var length=0;
+                        document.onmousemove=function (e) {
+                            length = e.clientX - moveX; //X坐标改变距离
+                            if(length>(vBar.offsetWidth-oLeft)){
+                                length=vBar.offsetWidth-oLeft;
+                            }else if(-length>oLeft){
+                                length=-oLeft;
+                            }
+                            my_audio.volume = (oLeft + length) / vBar.offsetWidth;
+                            vProBar.style.width=my_audio.volume*100+'%';
+                        };
+                        document.onmouseup=function(){
+                            document.onmousemove=null;
+                            document.onmouseup=null;
+                        }
+                    };
+                    vPoint.ontouchstart=function (e) {
+                        var curWidth=vProBar.offsetWidth; //保存开始滑动时的音量
+                        var startX=e.touches[0].clientX; //保存开始滑动的X坐标
+                        var lengthX=0;  //滑动距离
+                        vPoint.ontouchmove=function (e) {
+                            lengthX=e.touches[0].clientX-startX;
+                            if(lengthX>(vBar.offsetWidth-curWidth)){
+                                lengthX=vBar.offsetWidth-curWidth;
+                            }else if(-lengthX>curWidth){
+                                lengthX=-curWidth;
+                            }
+                            //滑动
+                            my_audio.volume = (curWidth + lengthX) / vBar.offsetWidth;
+                            vProBar.style.width=my_audio.volume*100+'%';
+                        };
+                        point.ontouchend=function () {
+                            point.ontouchmove=null;
+                            point.ontouchend=null;
+                        };
+                    }
+
+                }
+                setVolume();
+
                 /*显示歌单*/
                 function showList() {
                     for(var i=0,mLength=musics.length;i<mLength;i++){
@@ -468,7 +529,7 @@ window.onload=function () {
                         songList.appendChild(li);
                     }
                     listLis=songList.querySelectorAll('li');
-                     listLis.forEach(function (li) {
+                    listLis.forEach(function (li) {
                         li.onclick=function () {
                             var listNum=this.getAttribute('data-list');
                             listLis[index].classList.remove('now-play');
@@ -491,9 +552,9 @@ window.onload=function () {
                         li.classList.remove('now-play');
                     });
                     listLis[index].classList.add('now-play');
-                    listLis[index].scrollIntoView(false); //当前播放滚动到可见位置
+		    listLis[index].scrollIntoView(false); //当前播放滚动到可见位置
                 }
-                
+
             };
             xhr.send();
         }
