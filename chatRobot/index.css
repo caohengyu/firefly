@@ -48,29 +48,29 @@ body{
     overflow-y: auto;
 }
 .box::-webkit-scrollbar-track-piece {
-  background-color: rgba(0, 0, 0, 0);
-  border-left: 1px solid rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+    border-left: 1px solid rgba(0, 0, 0, 0);
 }
 .box::-webkit-scrollbar {
-  width: 4px;
-  height: 8px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
+    width: 4px;
+    height: 8px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
 }
 .box::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.6);
-  background-clip: padding-box;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  min-height: 18px;
+    background-color: rgba(0, 0, 0, 0.6);
+    background-clip: padding-box;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    min-height: 18px;
 }
 .box::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(0, 0, 0, 0.6);
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.6);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
 }
 .box ul.chat-box,.box #songList{
     width: 100%;
@@ -247,34 +247,36 @@ footer .audio{
     height: 60px;
     margin: 5px auto;
     position: relative;
+    overflow: hidden;
 }
 .audio .control .source{
     position: absolute;
-    left: 5%;
+    left: 50%;
     top: 0;
-    width: 25%;
+    width: 20%;
     height: 60px;
     text-align: center;
+    margin-left: 35px;
 }
 .control .source>a{
-    font-size: 15px;
+    font-size: 14px;
     line-height: 60px;
     color: rgba(250, 225, 200, 0.8);
 }
 .audio .control .play-btn{
-    width: 60px;
-    height: 60px;
-    margin: 0 auto;
-    border-radius: 30px;
+    width: 50px;
+    height: 50px;
+    margin: 5px auto;
+    border-radius: 25px;
     text-align: center;
-    font: bold 18px/40px sans-serif;
+    font: bold 18px/30px sans-serif;
     padding-top: 10px;
     cursor: pointer;
 }
 .audio .control .load-msg{
     position: absolute;
     bottom: 5px;
-    right: 5%;
+    right: 0;
     height: 50px;
     line-height: 25px;
     font-size: 12px;
@@ -386,4 +388,32 @@ footer .audio{
     box-shadow: 0 0 10px #fffd00;
     color: rgba(255, 250, 200, 0.8);
     font-size: 16px;
+}
+
+/*音量*/
+.audio .control .volume{
+    width: 120px;
+    height: 3px;
+    background-color: rgba(36, 36, 36, 0.8);
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    margin-top: -1.5px;
+    border-radius: 1.5px;
+}
+.control .volume .vol-bar{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255,255, 0.5);
+    position: relative;
+    border-radius: 1.5px;
+}
+.control .volume .vol-bar .vol-point{
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #eee;
+    position: absolute;
+    right: -5px;
+    top: -3.5px;
 }
