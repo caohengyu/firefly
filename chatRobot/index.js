@@ -488,8 +488,9 @@ window.onload=function () {
                             }else if(-length>oLeft){
                                 length=-oLeft;
                             }
-                            my_audio.volume = (oLeft + length) / vBar.offsetWidth;
-                            vProBar.style.width=my_audio.volume*100+'%';
+			    var rate=(oLeft + length) / vBar.offsetWidth;
+                            my_audio.volume = rate;
+                            vProBar.style.width=rate*100+'%';
                         };
                         document.onmouseup=function(){
                             document.onmousemove=null;
@@ -508,8 +509,9 @@ window.onload=function () {
                                 lengthX=-curWidth;
                             }
                             //滑动
-                            my_audio.volume = (curWidth + lengthX) / vBar.offsetWidth;
-                            vProBar.style.width=my_audio.volume*100+'%';
+			    var rate=(curWidth + lengthX) / vBar.offsetWidth;
+                            my_audio.volume = rate
+                            vProBar.style.width=rate*100+'%';
                         };
                         point.ontouchend=function () {
                             point.ontouchmove=null;
