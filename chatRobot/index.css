@@ -376,7 +376,7 @@ footer .audio{
     line-height: 25px;
     font-size: 14px;
     color: rgba(255, 255, 255, 0.8);
-    background-color: rgba(255, 150, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
     float: left;
     text-align: center;
     margin-left: 6.25%;
@@ -384,8 +384,8 @@ footer .audio{
     cursor: pointer;
 }
 .audio .order li.active{
-    background-color: rgba(255, 100, 10, 0.5);
-    box-shadow: 0 0 10px #fffd00;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px #fff;
     color: rgba(255, 250, 200, 0.8);
     font-size: 16px;
 }
