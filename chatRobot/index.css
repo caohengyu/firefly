@@ -384,8 +384,8 @@ footer .audio{
     cursor: pointer;
 }
 .audio .order li.active{
-    background-color: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 10px #fff;
+    background-color: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 20px #fff;
     color: rgba(255, 250, 200, 0.8);
     font-size: 16px;
 }
