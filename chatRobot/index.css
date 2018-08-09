@@ -285,7 +285,7 @@ footer .audio{
 }
 .control .play-btn.play{
     background-color: rgba(255, 250, 221, 0.7);
-    box-shadow: 0 0 20px #fff;
+    box-shadow: 0 0 10px #fff;
     color: rgba(0, 0, 0, 0.6);
 }
 .control .play-btn.pause{
