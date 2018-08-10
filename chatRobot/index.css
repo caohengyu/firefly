@@ -247,7 +247,7 @@ footer .audio{
     height: 60px;
     margin: 5px auto;
     position: relative;
-    overflow: hidden;
+    border-top: 0.1px solid transparent;
 }
 .audio .control .source{
     position: absolute;
