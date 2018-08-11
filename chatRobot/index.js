@@ -1,6 +1,6 @@
 window.onload=function () {
 
-    /*设置壁纸 每30秒刷新*/
+    /*设置壁纸 每8秒刷新*/
     function bag(t) { //t接收背景切换的秒数
         var body=document.querySelector('body');
         var images;
@@ -28,7 +28,7 @@ window.onload=function () {
             }
         }
     }
-    bag(30);
+    bag(8);
 
     /*主函数*/
     function chatRobot() {
@@ -218,7 +218,6 @@ window.onload=function () {
                 my_audio.src=musics[index]['src']; //初始化播放器的src
                 my_audio.load();
                 showList(); //显示歌单
-                updateList(); //更新歌单
                 //更新下一个要播放的index
                 function nextMusic() {
                     if(order==0){
@@ -279,9 +278,7 @@ window.onload=function () {
                     var p=my_audio.paused;
                     my_audio.src=musics[index]['src'];
                     my_audio.load();
-                    curBar.style.width=0;
-                    point.style.left=0;
-                    curTime.textContent='00:00';
+                    updateBt(0,mDuration);
                     if(!p) my_audio.play();
                 };
                 next.onclick=function () {
@@ -291,9 +288,7 @@ window.onload=function () {
                     var p=my_audio.paused;
                     my_audio.src=musics[index]['src'];
                     my_audio.load();
-                    curBar.style.width=0;
-                    point.style.left=0;
-                    curTime.textContent='00:00';
+                    updateBt(0,mDuration);
                     if(!p) my_audio.play();
                 };
 
@@ -326,8 +321,7 @@ window.onload=function () {
                         loadMsg.textContent='加载中 请稍候...'
                 };
                 my_audio.onerror=function () {
-                    if(!my_audio.paused)
-                        loadMsg.textContent='当前网络不稳定...'
+                    loadMsg.textContent='当前网络不稳定...'
                 };
 
                 //更新音频时长
@@ -446,7 +440,6 @@ window.onload=function () {
                                 if(lengthX>(bar.offsetWidth-curWidth)){
                                     updateBt(mDuration,mDuration);
                                     point.ontouchmove=null;
-                                    return false;
                                 }else if(-lengthX>curWidth){
                                     lengthX=-curWidth;
                                 }
@@ -454,6 +447,7 @@ window.onload=function () {
                                 var rate=(curWidth+lengthX)/bar.offsetWidth;
                                 my_audio.currentTime=mDuration*rate;
                                 updateBt(my_audio.currentTime,mDuration);
+                                return false;
                             }
 
                         }
@@ -488,7 +482,7 @@ window.onload=function () {
                             }else if(-length>oLeft){
                                 length=-oLeft;
                             }
-			    var rate=(oLeft + length) / vBar.offsetWidth;
+                            var rate=(oLeft + length) / vBar.offsetWidth;
                             my_audio.volume = rate;
                             vProBar.style.width=rate*100+'%';
                         };
@@ -509,8 +503,8 @@ window.onload=function () {
                                 lengthX=-curWidth;
                             }
                             //滑动
-			    var rate=(curWidth + lengthX) / vBar.offsetWidth;
-                            my_audio.volume = rate
+                            var rate=(curWidth + lengthX) / vBar.offsetWidth;
+                            my_audio.volume = rate;
                             vProBar.style.width=rate*100+'%';
                         };
                         point.ontouchend=function () {
@@ -531,32 +525,31 @@ window.onload=function () {
                         songList.appendChild(li);
                     }
                     listLis=songList.querySelectorAll('li');
-                    listLis.forEach(function (li) {
-                        li.onclick=function () {
-                            var listNum=this.getAttribute('data-list');
+                    listLis[index].classList.add('now-play');
+                    songList.onclick=function (e) {
+                        if(e.target.tagName=='LI'){
+                            var li=e.target;
+                            var listNum=li.getAttribute('data-list');
                             listLis[index].classList.remove('now-play');
                             index=listNum;
                             updateBt(0,mDuration);
                             showName();
+                            li.classList.add('now-play');
                             my_audio.src=musics[index]['src'];
                             musicList=[];
                             my_audio.load();
                             my_audio.play();
-                            this.classList.add('now-play');
                             playButton.classList.remove('pause');
                             playButton.classList.add('play');
                             playButton.textContent='暂停';
                         }
-                    })
+                    }
                 }
                 function updateList(){
-                    listLis.forEach(function (li) {
-                        li.classList.remove('now-play');
-                    });
+                    songList.querySelector('li.now-play').classList.remove('now-play');
                     listLis[index].classList.add('now-play');
-		    listLis[index].scrollIntoView(false); //当前播放滚动到可见位置
+		            listLis[index].scrollIntoView(false); //当前播放滚动到可见位置
                 }
-
             };
             xhr.send();
         }
