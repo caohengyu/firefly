@@ -1,6 +1,6 @@
 window.onload=function () {
 
-    /*设置壁纸 每8秒刷新*/
+    /*设置壁纸 每33秒刷新*/
     function bag(t) { //t接收背景切换的秒数
         var body=document.querySelector('body');
         var images;
@@ -28,7 +28,7 @@ window.onload=function () {
             }
         }
     }
-    bag(8);
+    bag(33);
 
     /*主函数*/
     function chatRobot() {
@@ -440,6 +440,7 @@ window.onload=function () {
                                 if(lengthX>(bar.offsetWidth-curWidth)){
                                     updateBt(mDuration,mDuration);
                                     point.ontouchmove=null;
+				    return false;
                                 }else if(-lengthX>curWidth){
                                     lengthX=-curWidth;
                                 }
