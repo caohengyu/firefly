@@ -227,16 +227,16 @@ window.onload=function () {
                             index=0;
                         }
                     }else if(order==1){
+                       	musicList.push(index); //已播放的加入数组
                         //已播放满就清空数组
                         if(musicList.length==musics.length)
                             musicList=[];
                         var length=musics.length;
                         var ranNum=Math.floor(Math.random()*length);
-                        while (ranNum==index||musicList.includes(ranNum)){
+                        while (musicList.includes(ranNum)){
                             ranNum=Math.floor(Math.random()*length);
                         }
                         index=ranNum;
-                        musicList.push(index);
                     }
                 }
 
@@ -266,9 +266,9 @@ window.onload=function () {
                             index=musics.length-1;
                         }
                     }else if(order==1){
-                        if(musicList.length>1){
-                            musicList.pop();
+                        if(musicList.length>0){
                             index=musicList[musicList.length-1];
+                            musicList.pop();
                         }else{
                             nextMusic();
                         }
