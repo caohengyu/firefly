@@ -227,7 +227,8 @@ window.onload=function () {
                             index=0;
                         }
                     }else if(order==1){
-                       	musicList.push(index); //已播放的加入数组
+		        if(!musicList.includes(index))	
+                       	    musicList.push(index); //已播放的加入数组
                         //已播放满就清空数组
                         if(musicList.length==musics.length)
                             musicList=[];
@@ -244,9 +245,7 @@ window.onload=function () {
                 orderLis.forEach(function (ele,index,arr) {
                     ele.onclick=function () {
                         var liOrder=this.getAttribute('data-order');
-                        if(liOrder!=order){
-                            musicList=[];//重置已随机播放数组
-                            //重置样式
+                        if(liOrder!=order){                           
                             arr[order].classList.remove('active');
                             this.classList.add('active');
                             order=liOrder; //更新播放顺序
@@ -537,7 +536,6 @@ window.onload=function () {
                             showName();
                             li.classList.add('now-play');
                             my_audio.src=musics[index]['src'];
-                            musicList=[];
                             my_audio.load();
                             my_audio.play();
                             playButton.classList.remove('pause');
