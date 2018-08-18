@@ -299,7 +299,7 @@ footer .audio{
 }
 
 .audio .bar{
-    width: 95%;
+    width: 98%;
     margin: 0 auto;
     margin-top: 10px;
     height: 5px;
@@ -404,7 +404,7 @@ footer .audio{
     position: absolute;
     left: 10px;
     top: 50%;
-    margin-top: -1.5px;
+    margin-top: 0.5px;
     border-radius: 1.5px;
 }
 .control .volume .vol-bar{
