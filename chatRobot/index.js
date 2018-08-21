@@ -148,6 +148,7 @@ window.onload=function () {
                                 btn.addEventListener('click',f_click,false);
                                 chatBox.style.display='block'; //显示聊天内容
                                 songList.style.display='none'; //隐藏歌单
+				box.scrollTop=box.scrollHeight; //滚动条滚动到底部
                             }else {
                                 songList.style.display='block'; //显示歌单
                                 listLis[index].scrollIntoView(false); //当前播放滚动到可见位置
