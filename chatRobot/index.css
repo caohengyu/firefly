@@ -124,23 +124,19 @@ footer ul.menu{
     width: 100%;
     background-color: rgba(255, 210, 157, 0.8);
     padding-top: 5px;
+    position: relative;
 }
-/* .chat-box li:before,.chat-box li:after{
-    content: "";
-    display: table;
-    clear: both;
-} */
 .chat-box li img{
     position: absolute;
     left: 0;
-    top: 0;
+    top: 5px;
     height: 30px;
 }
 .container .chat-box p{
     font-size: 15px;
     line-height: 30px;
     width: 85%;
-    overflow: hidden;
+    margin-left: 30px;
     word-break: break-all;
     white-space:pre-wrap; /*保留空白和换行*/
     position: relative;
