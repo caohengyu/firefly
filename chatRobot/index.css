@@ -123,14 +123,17 @@ footer ul.menu{
 .chat-box li{
     width: 100%;
     background-color: rgba(255, 210, 157, 0.8);
+    padding-top: 5px;
 }
-.chat-box li:before,.chat-box li:after{
+/* .chat-box li:before,.chat-box li:after{
     content: "";
     display: table;
     clear: both;
-}
-img{
-    float: left;
+} */
+.chat-box li img{
+    position: absolute;
+    left: 0;
+    top: 0;
     height: 30px;
 }
 .container .chat-box p{
