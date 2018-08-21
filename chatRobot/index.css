@@ -77,6 +77,7 @@ body{
     background-color: rgba(255, 210, 157, 0.8);
     -webkit-user-select:none;
     user-select: none;
+    display: none;
 }
 .box ul.chat-box{
     padding-bottom: 80px;
@@ -174,6 +175,9 @@ footer{
     left: 0;
     bottom: 0;
     text-align: left;
+}
+#text{
+    display: none;
 }
 .text{
     width: 70%;
