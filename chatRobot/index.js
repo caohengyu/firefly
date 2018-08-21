@@ -102,9 +102,6 @@ window.onload=function () {
         //切换功能函数
         function tapSwitch() {
             var menuIndex=1; //存放当前激活按钮的序号,默认为第2个按钮
-            //隐藏输入框
-            document.getElementById('text').style.display='none';
-            songList.style.display='none'; //隐藏歌单
             //调用音乐播放器
             my_Music(musicUrl);
 
