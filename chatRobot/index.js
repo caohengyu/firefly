@@ -342,7 +342,7 @@ window.onload=function () {
                     showTime(totalTime,mDuration); //显示
                 };
 		setInterval(function(){
-		    if(my_audio.paused&&playButton.textContent='暂停'){
+		    if(my_audio.paused&&playButton.textContent=='暂停'){
 			showTime(totalTime,my_audio.duration);
 			my_audio.play();
 		    }
