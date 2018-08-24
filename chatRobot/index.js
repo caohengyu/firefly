@@ -341,6 +341,12 @@ window.onload=function () {
                     mDuration=my_audio.duration; //更新时长
                     showTime(totalTime,mDuration); //显示
                 };
+		setInterval(function(){
+		    if(my_audio.paused&&playButton.textContent='暂停'){
+			showTime(totalTime,my_audio.duration);
+			my_audio.play();
+		    }
+		},1000)
 
                 //更新进度条与当前播放时间
                 my_audio.ontimeupdate=function () {
